@@ -1,0 +1,209 @@
+---
+title: "data.table"
+author: "Cali Li"
+date: "11/27/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+
+```{r}
+# load packages: -------------------------------------------------------------
+library(data.table)
+library(dplyr)
+
+# load data
+recs = fread('recs2015_public_v4.csv')
+
+# compute proportion based on nweight
+prop_nweight = recs[, uatyp := ifelse(UATYP10 == "R",
+                                      "R_nweight", "U_nweight")] %>%
+  .[, .(DOEID, uatyp, NWEIGHT, DIVISION, INTERNET)] %>%
+  .[, nweight_internet := ifelse(INTERNET == 1, NWEIGHT, 0)] %>%
+  .[, .(sum_nweight_internet = sum(nweight_internet), 
+        sum_nweight = sum(NWEIGHT)), by = .(uatyp, DIVISION)] %>%
+  .[, prop := sum_nweight_internet / sum_nweight] %>%
+  .[, .(uatyp, division = DIVISION, prop)] %>%
+  melt(id = 1:2) %>%
+  dcast(division ~ uatyp)
+
+# compute proportion based on brrwt*
+prop_brrwt = recs[,uatyp := ifelse(UATYP10 == "R", "R_brrwt", "U_brrwt")] %>%
+  .[, .(DOEID, uatyp, DIVISION, INTERNET, .SD),
+    .SDcols = paste("BRRWT", 1:96, sep = "")] %>%
+  melt(id = 1:4) %>%
+  .[, .(sum_brrwt_internet = sum(value*INTERNET), 
+        sum_brrwt = sum(value)), by = .(uatyp, DIVISION, variable)] %>%
+  .[, prop := sum_brrwt_internet / sum_brrwt] %>%
+  .[, .(uatyp, division = DIVISION, variable, prop)] %>%
+  dcast(division + variable ~ uatyp) %>%
+  .[prop_nweight, on = 'division'] %>%
+  
+  # compute se and CI based on brrwt*
+  .[, se := sqrt(sum((abs(R_nweight - U_nweight) - abs(R_brrwt-U_brrwt))^2)
+                 *4/96), by = division] %>%
+  .[, `:=`(disparsity = round(abs(R_nweight - U_nweight), 3),
+           lwr = round(abs(R_nweight - U_nweight) - se, 3),
+           upr = round(abs(R_nweight - U_nweight) + se, 3))] %>%
+  
+  # output a table
+  .[, .(Division = replace(unique(division), 1 : 10, 
+                           c('New England', 'Middle Atlantic',
+                             'East North Central', 'West North Central',
+                             'South Atlantic', 'East South Central',
+                             'West South Central', 'Mountain North',
+                             'Mountain South', 'Pacific')),
+        Disparsity = unique(disparsity),
+        Lwr = unique(lwr),
+        Upr = unique(upr))] %>%
+  .[order(-Disparsity)] %>%
+  knitr::kable(align = 'c')
+
+prop_brrwt
+```
+
+## Question 2
+
+```{r}
+# question 2.a
+cat('gunzip -c GSE138311_series_matrix.txt.gz | head -n 100')
+cat('gunzip -c GSE138311_series_matrix.txt.gz | tail -n +69 > total_data.txt')
+```
+
+```{r}
+# load packages: -------------------------------------------------------------
+library(dplyr)
+library(tidyr)
+library(data.table)
+
+# question b
+## load data into R
+data = fread('C:/Users/wenji/Downloads/total_data.txt')
+data = data[grep('^ch', ID_REF), 
+            which(unlist(lapply(data, function(x) !all(is.na(x))))),
+            with = FALSE] %>%
+  melt(id=1)
+
+# question c
+## From the information, we can get that GSM4105187-GSM4105193 are samples for 
+## Crohn's disease; while GSM4105194-GSM4105198 are samples for no Crohn's 
+## disease.
+data = data[, `:=`(sample_group = ifelse(variable %in% unique(variable)[1:7],
+                                         "Crohn", "noCrohn"))]
+
+# question d
+## cmpute t-stats
+t_stats = dcast(data, ID_REF+variable~sample_group) %>%
+  .[, .(mean = mean(Crohn, na.rm = TRUE) - mean(noCrohn, na.rm = TRUE),
+           std_Crohn = sd(Crohn, na.rm = TRUE),
+           std_noCrohn = sd(noCrohn, na.rm = TRUE)),
+    by = .(ID_REF)] %>%
+  .[, .(ID_REF,
+        t_stats = round(mean / (sqrt((6 * (std_Crohn) ^ 2 + 
+                                     4 * (std_noCrohn) ^ 2) / 10) *
+                               sqrt(1/7 + 1/5)),3))]
+    
+# question e
+data_e = data[, `:=`(probe_group = substr(ID_REF, 0, 5))]
+
+# question f
+## compute proportion based on significance
+data_f = data_e[t_stats, on = 'ID_REF'] %>%
+  .[, p := 2 * pt(t_stats, df = 10)] %>%
+  .[, `:=`(sig = 1L * (p < 0.05))] %>%
+  .[, .(prop = sum(sig) / .N), by = probe_group]
+
+# question g
+t_stat = function(data, type, permute=TRUE) {
+  if (permute) {
+    data = data[, sample_group1 := sample_group[sample(1:.N, 
+                                                       replace = FALSE)]]
+  }
+  ## Compute t-stats
+  data_1 = data[sample_group1 == 'Crohn', .(ccount = .N, cmean = mean(value),
+                                           x1 = sum(value^2) - 
+                                             .N * ((mean(value))^2)),
+                by = ID_REF]
+  data_2 = data[sample_group1 == 'noCrohn', .(ncount = .N, 
+                                              nmean = mean(value),
+                                              x2 = sum(value^2) - 
+                                                .N * ((mean(value))^2)),
+                by = ID_REF]
+  data_t = data_1[data_2, on = 'ID_REF'] %>%
+    .[, .(t_stats = (cmean - nmean) / sqrt((x1 + x2)/(ccount + ncount - 2))
+          / sqrt(1 / ccount + 1 / ncount)), by = ID_REF] %>%
+    .[, `:=`(probe_group = substr(ID_REF, 0, 5))]
+  
+  ## compute three different computation methods
+  if (type == "two_tailed") {
+    t = data_t[, p := qt(1-0.05/2, df = 10)] %>%
+      .[, `:=`(sig = 1L * (abs(t_stats) > p))] %>%
+      .[, .(prop = sum(abs(sig)) / .N), by = probe_group]
+  }
+  if (type == "greater") {
+    t = data_t[, p := qt(1-0.05, df = 10)] %>%
+      .[, `:=`(sig = 1L * (t_stats > p))] %>%
+      .[, .(prop = sum(sig) / .N), by = probe_group]
+  }
+  if (type == "lesser") {
+    t = data_t[, p := qt(0.05, df = 10)] %>%
+      .[, `:=`(sig = 1L * (t_stats < p))] %>%
+      .[, .(prop = sum(sig) / .N), by = probe_group]
+  }
+  return(t)
+}
+
+# question h
+## compute on the original data
+t_stat(data, type = "two_tailed")
+
+## define a new function stat_h
+stat_h = function(n) {
+  t = t_stat(data, type = "two_tailed")
+  return(t)
+}
+p = function(n) {
+  mean(n$prop) / (sd(n$prop)/sqrt(22))
+}
+
+## compute time over 1000 permutation
+system.time({
+  test_h = lapply(1:1000, stat_h)
+  p_h = lapply(test_h, p)
+})
+
+# question j
+## mclapply
+## define a new function stat_j using greater method.
+stat_j = function(n) {
+  t = t_stat(data, type = "greater")
+  return(t)
+}
+
+## load package and compute time over 1000 permutation
+library(parallel)
+system.time({
+  test_j = mclapply(1:1000, stat_j)
+  p_j = mclapply(test_j, p)
+})
+
+# question i
+## future
+## define a new function stat_i using lesser method.
+stat_i = function(n) {
+  t = t_stat(data, type = "lesser")
+  return(t)
+}
+
+## load package and compute time over 1000 permutation
+library(future)
+plan(multisession)
+system.time({
+  test_h = lapply(1:1000, stat_i)
+  p_j = lapply(test_j, p)
+})
+```

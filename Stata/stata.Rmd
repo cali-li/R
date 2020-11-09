@@ -1,0 +1,59 @@
+---
+title: "Problem Set 4"
+author: "Wenjing Li"
+date: "11/18/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+
+```{r, echo=FALSE}
+# Stats 506, Fall 2019
+# Problem Set 4, Question 2
+#
+# This script contains nice output table for question 2
+#
+# Author: Wenjing Li
+# Uniqname: lwenjing
+# Date: 11/18/2019
+
+#80: ---------------------------------------------------------------------------
+
+# load data: -------------------------------------------------------------------
+library(readxl)
+q1 = read_excel('C:/Users/wenji/Downloads/ps4_q1.xls')
+cap = '*Estimation for 4 different measurements.*'
+knitr::kable(q1, digits = 3, caption = cap)
+```
+
+## Question 2
+
+```{r, echo=FALSE}
+recs = readr::read_delim('C:/Users/wenji/Downloads/recs2015_result.csv',
+                         delim=',')
+cap = '*key data summaries for disparity in different census division.*'
+knitr::kable(recs, digits = 3, caption = cap)
+```
+
+Note that the division 9 has the largest disparity. Division 9 is the mountain south.
+
+## Question 3
+
+```{r, echo=FALSE}
+# q3c
+q1 = read_excel('C:/Users/wenji/Downloads/ps4_q3c.xls')
+cap = '*Result for logistic regression.*'
+knitr::kable(q1, digits = 3, caption = cap)
+# q3d
+q1 = read_excel('C:/Users/wenji/Downloads/ps4_q3d.xls')
+cap = '*Result for mixed logistic regression.*'
+knitr::kable(q1, digits = 3, caption = cap)
+```
+
+Note that two methods product similar result and the result from the first logistic model is much more precise than the other one.
+
+Since all of the odd ratios in the model are around 1, that means each increasion in the predictors may not cause a difference in response. Thus, the statement that people in the US are more likely to drink water on a weekday than a weekend day is not sure.

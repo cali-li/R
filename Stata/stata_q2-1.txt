@@ -1,0 +1,129 @@
+﻿--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\lwenjing\Downloads\ps4\ps4_q2\ps4_q2.log
+  log type:  text
+ opened on:  18 Nov 2019, 12:02:49
+
+. 
+. // load data
+. import delimited recs2015_public_v4.csv, clear
+(759 vars, 5,686 obs)
+
+. // generate new variable uatyp with 0 represent "Urban", 1 means "Rural"
+. gen uatyp= uatyp10=="R"
+
+. label define typ_label 0 "Urban" 1 "Rural"
+
+. label values uatyp typ_label
+
+. preserve
+
+. // compute proportion based on nweight
+. keep doeid uatyp nweight internet division
+
+. gen nweight_half= cond(internet==1,nweight,0)
+
+. collapse (sum) nweight* , by(division uatyp)
+
+. gen nweight_prop= nweight_half/nweight
+
+. drop nweight nweight_half
+
+. reshape wide nweight_prop, i(division) j(uatyp)
+(note: j = 0 1)
+
+Data                               long   ->   wide
+-----------------------------------------------------------------------------
+Number of obs.                       20   ->      10
+Number of variables                   3   ->       3
+j variable (2 values)             uatyp   ->   (dropped)
+xij variables:
+                           nweight_prop   ->   nweight_prop0 nweight_prop1
+-----------------------------------------------------------------------------
+
+. save half_result_recs2015.dta, replace
+file half_result_recs2015.dta saved
+
+. restore
+
+. // compute proportion based on replicate weights
+. local var="brrwt*"
+
+. keep doeid uatyp internet division `var'
+
+. reshape long brrwt, i(doeid) j(weight)
+(note: j = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 
+> 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 
+> 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 
+> 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                     5686   ->  545856
+Number of variables                 100   ->       6
+j variable (96 values)                    ->   weight
+xij variables:
+              brrwt1 brrwt2 ... brrwt96   ->   brrwt
+-----------------------------------------------------------------------------
+
+. gen brrwt_half= cond(internet==1,brrwt,0)
+
+. collapse (sum) brrwt* , by(division uatyp weight)
+
+. gen brrwt_prop= brrwt_half/brrwt
+
+. drop brrwt brrwt_half
+
+. reshape wide brrwt_prop, i(division weight) j(uatyp)
+(note: j = 0 1)
+
+Data                               long   ->   wide
+-----------------------------------------------------------------------------
+Number of obs.                     1920   ->     960
+Number of variables                   4   ->       4
+j variable (2 values)             uatyp   ->   (dropped)
+xij variables:
+                             brrwt_prop   ->   brrwt_prop0 brrwt_prop1
+-----------------------------------------------------------------------------
+
+. // merge two tables and compute se
+. merge m:1 division using half_result_recs2015.dta
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                               960  (_merge==3)
+    -----------------------------------------
+
+. gen dispar_weight= abs(nweight_prop0-nweight_prop1)
+
+. gen dispar_brrwt= abs(brrwt_prop0-brrwt_prop1)
+
+. gen se_dispar= (dispar_brrwt-dispar_weight)^2
+
+. collapse (first) dispar_weight (sum) se_dispar, by(division)
+
+. 
+. replace se_dispar=sqrt(se_dispar*4/96)
+(10 real changes made)
+
+. gen lwr_dispar= dispar_weight - se_dispar
+
+. gen upr_dispar= dispar_weight + se_dispar
+
+. drop se_dispar
+
+. // sort data and export result
+. gsort -dispar_weight
+
+. export delimited recs2015_result.csv, replace
+(note: file recs2015_result.csv not found)
+file recs2015_result.csv saved
+
+. 
+. log close
+      name:  <unnamed>
+       log:  C:\Users\lwenjing\Downloads\ps4\ps4_q2\ps4_q2.log
+  log type:  text
+ closed on:  18 Nov 2019, 12:03:02
+--------------------------------------------------------------------------------

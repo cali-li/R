@@ -1,0 +1,180 @@
+2828  proc sql;
+2829
+2830      create table total as
+2831          select (TEMPNITE*BRRWT/sum(BRRWT)-TEMPNITE*NWEIGHT/sum(NWEIGHT))**2 as diff,
+2832       TEMPNITE*NWEIGHT/sum(NWEIGHT) as means_tot, count
+2833          from brr_long.sas7bdat
+2834          group by count;
+NOTE: The query requires remerging summary statistics back with the original data.
+NOTE: Table WORK.TOTAL created, with 515904 rows and 3 columns.
+
+2835
+2836    create table estimate as
+2837      select sum(means_tot)-quantile('NORMAL',0.975)*sqrt(sum(diff)*4/96) as lwr,
+2838            sum(means_tot)+quantile('NORMAL',0.975)*sqrt(sum(diff)*4/96) as upr
+2839      from total;
+NOTE: Table WORK.ESTIMATE created, with 1 rows and 2 columns.
+
+2840      quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.59 seconds
+      cpu time            0.28 seconds
+
+
+2841  run;
+2842  /** by census division **/
+2843  proc sql;
+2844
+2845    create table total_q2_nweight as
+2846      select sum(TEMPNITE*NWEIGHT)/sum(NWEIGHT) as w4tempnite,
+2847              sum(TEMPGONE*NWEIGHT)/sum(NWEIGHT) as w4tempgone,
+2848              sum(TEMPHOME*NWEIGHT)/sum(NWEIGHT) as w4temphome,
+2849               DIVISION
+2850      from brr_long.ps6_q2_result
+2851      where TEMPNITE ne -2 and TEMPHOME ge 0 and TEMPGONE ge 0;
+NOTE: The query requires remerging summary statistics back with the original data.
+NOTE: Table WORK.TOTAL_Q2_NWEIGHT created, with 5428 rows and 4 columns.
+
+2852      quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.15 seconds
+      cpu time            0.04 seconds
+
+
+2853  run;
+2854  /** for replicate weights **/
+2855  proc sql;
+2856
+2857    create table ps6_q2_brr as
+2858      select sum(TEMPNITE*BRRWT) as sum4tempnite,
+2859              sum(TEMPGONE*BRRWT) as sum4tempgone,
+2860              sum(TEMPHOME*BRRWT) as sum4temphome,
+2861              DIVISION, count, sum(BRRWT) as sum_brr
+2862      from ps6_q2_brr
+2863      group by DIVISION, count;
+WARNING: This CREATE TABLE statement recursively references the target table. A consequence of
+         this is a possible data integrity problem.
+NOTE: Table WORK.PS6_Q2_BRR created, with 960 rows and 6 columns.
+
+2864      quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.16 seconds
+      cpu time            0.09 seconds
+
+
+2865  run;
+2866
+2867  proc sql;
+2868      create table total_q2_brr as
+2869      select b.sum4tempnite/b.sum_brr as brr4tempnite,
+2870              b.sum4tempgone/b.sum_brr as brr4tempgone,
+2871              b.sum4temphome/b.sum_brr as brr4temphome,
+2872              b.DIVISION, b.count, n.w4tempnite, n.w4tempgone, n.w4temphome
+2873      from ps6_q2_brr b
+2874      inner join total_q2_nweight n
+2875      on n.DIVISION=b.DIVISION
+2876      order by b.DIVISION;
+NOTE: Table WORK.TOTAL_Q2_BRR created, with 521088 rows and 8 columns.
+
+2877      quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.24 seconds
+      cpu time            0.34 seconds
+
+
+2878  run;
+2879  proc sql;
+2880    create table total_q2_brr_1 as
+2881      select DIVISION as division,
+2882            (brr4tempnite-w4tempnite)**2 as nite2,
+2883            (brr4tempgone-w4tempgone)**2 as gone2,
+2884            (brr4temphome-w4temphome)**2 as home2,
+2885            w4tempnite, w4tempgone, w4temphome
+2886      from total_q2_brr;
+NOTE: Table WORK.TOTAL_Q2_BRR_1 created, with 521088 rows and 7 columns.
+
+2887    quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.30 seconds
+      cpu time            0.25 seconds
+
+
+2888  run;
+2889  proc sql;
+2890    create table total_q2_brr_2 as
+2891      select division,
+2892            sum(nite2) as sum_nite,
+2893            sum(gone2) as sum_gone,
+2894            sum(home2) as sum_home
+2895      from total_q2_brr_1
+2896      group by division;
+NOTE: Table WORK.TOTAL_Q2_BRR_2 created, with 10 rows and 4 columns.
+
+2897    quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.09 seconds
+
+
+2898  run;
+2899  proc sql;
+2900    create table total_q2_brr_3 as
+2901      select l.division,
+2902            quantile('NORMAL', 0.975)*sqrt(l.sum_nite)*4/96 as se_nite,
+2903            quantile('NORMAL', 0.975)*sqrt(l.sum_gone)*4/96 as se_gone,
+2904            quantile('NORMAL', 0.975)*sqrt(l.sum_home)*4/96 as se_home,
+2905            r.w4tempnite, r.w4tempgone, r.w4temphome
+2906      from total_q2_brr_2 l
+2907      inner join total_q2_brr_1 r
+2908      on l.division=r.division
+2909      group by l.division;
+WARNING: A GROUP BY clause has been transformed into an ORDER BY clause because neither the
+         SELECT clause nor the optional HAVING clause of the associated table-expression
+         referenced a summary function.
+NOTE: Table WORK.TOTAL_Q2_BRR_3 created, with 521088 rows and 7 columns.
+
+2910    quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.22 seconds
+      cpu time            0.18 seconds
+
+
+2911  run;
+2912
+2913  proc sql;
+2914    create table totals_q2 as
+2915      select DIVISION as division,
+2916            w4tempnite - se_nite as lwr_nite,
+2917            w4tempnite + se_nite as upr_nite,
+2918            w4tempgone - se_gone as lwr_gone,
+2919            w4tempgone + se_gone as upr_gone,
+2920            w4temphome - se_home as lwr_home,
+2921            w4temphome + se_home as upr_home,
+2922            w4tempnite, w4tempgone, w4temphome
+2923      from total_q2_brr_3
+2924      group by division
+2925      having monotonic()=min(monotonic());
+NOTE: The query requires remerging summary statistics back with the original data.
+NOTE: Table WORK.TOTALS_Q2 created, with 10 rows and 10 columns.
+
+2926    quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.40 seconds
+      cpu time            0.26 seconds
+
+
+2927  run;
+2928
+2929  /* Print the result: -------------------------------------------------------- */
+2930  proc print data=totals_q2;
+2931    format DIVISION division.;
+2932  title "Estimation for winter home temperatures at night,
+2933        during the day with somone home, and during the day with no one home.";
+2934  run;
+
+NOTE: There were 10 observations read from the data set WORK.TOTALS_Q2.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.01 seconds
+
+

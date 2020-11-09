@@ -1,0 +1,475 @@
+﻿--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\lwenjing\Downloads\ps4\ps4_q3\ps4_q3.log
+  log type:  text
+ opened on:  18 Nov 2019, 12:25:41
+
+. 
+. // "DR1TOT_D.XPT"
+. fdause "DR1TOT_D.XPT", clear
+
+. gen weekday1= drdint==1
+
+. label define typ_label 0 "F" 1 "M"
+
+. label values weekday1 typ_label
+
+. rename dr1day day1
+
+. gen water1=dr1_320z+dr1_330z+dr1bwatz
+(601 missing values generated)
+
+. gen any_water1= water1>0
+
+. keep seqn day1 weekday1 any_water1
+
+. save day1_table.dta, replace
+file day1_table.dta saved
+
+. 
+. // "DR2TOT_D.XPT"
+. fdause "DR2TOT_D.XPT", clear
+
+. gen weekday2= drdint==1
+
+. label define typ_label2 0 "F" 1 "M"
+
+. label values weekday2 typ_label2
+
+. rename dr2day day2
+
+. gen water2=dr2_320z+dr2_330z+dr2bwatz
+(1,521 missing values generated)
+
+. gen any_water2= water2>0
+
+. keep seqn day2 weekday2 any_water2
+
+. save day2_table.dta, replace
+file day2_table.dta saved
+
+. fdause "DEMO_D.XPT", clear
+
+. 
+. // 
+. gen winter= ridexmon==1
+
+. label define typ_label 0 "N" 1 "Y"
+
+. label values winter typ_label
+
+. keep ridageyr seqn riagendr indfmpir winter
+
+. merge 1:1 seqn using day1_table.dta
+(label typ_label already defined)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           398
+        from master                       398  (_merge==1)
+        from using                          0  (_merge==2)
+
+    matched                             9,950  (_merge==3)
+    -----------------------------------------
+
+. keep if _merge==3
+(398 observations deleted)
+
+. drop _merge
+
+. merge 1:1 seqn using day2_table.dta
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                             9,950  (_merge==3)
+    -----------------------------------------
+
+. drop _merge
+
+. reshape long day weekday any_water, i(ridageyr seqn riagendr indfmpir winter) 
+> j(survey_day)
+(note: j = 1 2)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                     9950   ->   19900
+Number of variables                  11   ->       9
+j variable (2 values)                     ->   survey_day
+xij variables:
+                              day1 day2   ->   day
+                      weekday1 weekday2   ->   weekday
+                  any_water1 any_water2   ->   any_water
+-----------------------------------------------------------------------------
+
+. save water_table.dta, replace
+file water_table.dta saved
+
+. preserve
+
+. 
+. * Question 3.2 ---------------------------------------------------------------
+> -*
+. // centering the continuous variables, age(ridageyr) and pir(indfmpir)
+. gen missing=0
+
+. foreach l of varlist *{
+  2.         replace missing=1 if `l'==.
+  3.         }
+(0 real changes made)
+(0 real changes made)
+(0 real changes made)
+(974 real changes made)
+(0 real changes made)
+(0 real changes made)
+(1,663 real changes made)
+(0 real changes made)
+(0 real changes made)
+(0 real changes made)
+
+. *gen byte missing= missing(ridageyr, seqn, riagendr, indfmpir, winter, survey_
+> day, day,any_water, weekday)
+. keep if missing==0
+(2,637 observations deleted)
+
+. summarize ridageyr
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+    ridageyr |     17,263    27.85391    23.75908          0         85
+
+. gen centered_age = ridageyr  - r(mean)
+
+. replace centered_age = centered_age/10
+(17,263 real changes made)
+
+. label variable centered_age "Centered age by decade"
+
+. summarize indfmpir
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+    indfmpir |     17,263    2.384811    1.586382          0          5
+
+. gen centered_pir = indfmpir  - r(mean)
+
+. label variable centered_pir "Centered PIR"
+
+. drop missing ridageyr indfmpir
+
+. save mod_water_table.dta, replace
+file mod_water_table.dta saved
+
+. 
+. * Question 3.3 ---------------------------------------------------------------
+> -*
+. // fit model
+. logistic any_water i.weekday i.winter c.centered_age##c.centered_age i.riagend
+> r centered_pir
+
+Logistic regression                             Number of obs     =     17,263
+                                                LR chi2(6)        =     547.42
+                                                Prob > chi2       =     0.0000
+Log likelihood = -9720.6693                     Pseudo R2         =     0.0274
+
+-------------------------------------------------------------------------------
+    any_water | Odds Ratio   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      weekday |
+           M  |    1.00126   .0767939     0.02   0.987     .8615131    1.163675
+              |
+       winter |
+           Y  |    .954603   .0336835    -1.32   0.188     .8908156    1.022958
+ centered_age |   1.184947   .0116249    17.30   0.000      1.16238    1.207952
+              |
+           c. |
+ centered_age#|
+           c. |
+ centered_age |   .9767381   .0034015    -6.76   0.000     .9700939    .9834277
+              |
+   2.riagendr |   1.361515   .0478198     8.79   0.000     1.270943    1.458541
+ centered_pir |   1.090267   .0126929     7.42   0.000     1.065671    1.115431
+        _cons |   2.864419   .1065497    28.29   0.000     2.663017    3.081054
+-------------------------------------------------------------------------------
+Note: _cons estimates baseline odds.
+
+. matrix return_table1=r(table)
+
+. 
+. // compute marginal effects
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =     17,263
+Model VCE    : OIM
+
+Expression   : Pr(any_water), predict()
+dy/dx w.r.t. : 1.weekday 1.winter centered_age 2.riagendr centered_pir
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     weekday |
+          M  |   .0002378   .0144833     0.02   0.987     -.028149    .0286246
+             |
+      winter |
+          Y  |  -.0087822   .0066726    -1.32   0.188    -.0218602    .0042958
+centered_age |   .0352132   .0022156    15.89   0.000     .0308707    .0395556
+  2.riagendr |   .0584952   .0066436     8.80   0.000      .045474    .0715164
+centered_pir |   .0163279   .0021895     7.46   0.000     .0120366    .0206193
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+
+. matrix return_table2=r(table)
+
+. 
+. // select data
+. mata
+------------------------------------------------- mata (type end to exit) ------
+: return_table1=st_matrix("return_table1")
+
+: return_table1=return_table1[(1,5,6),(2,4,5,6,8,9)]
+
+: st_matrix("ratio",return_table1)
+
+: return_table2=st_matrix("return_table2")
+
+: return_table2=return_table2[(1,5,6),(2,4,5,7,8)]
+
+: st_matrix("margin",return_table2)
+
+: end
+--------------------------------------------------------------------------------
+
+. 
+. // make table
+. putexcel set ps4_q3c.xls, replace
+Note: file will be replaced when the first putexcel command is issued
+
+. 
+. // set column name
+. putexcel A2="ratio"
+file ps4_q3c.xls saved
+
+. putexcel A3="lwr"
+file ps4_q3c.xls saved
+
+. putexcel A4="upr"
+file ps4_q3c.xls saved
+
+. putexcel A5="margin"
+file ps4_q3c.xls saved
+
+. putexcel A6="lwr_margin"
+file ps4_q3c.xls saved
+
+. putexcel A7="upr_margin"
+file ps4_q3c.xls saved
+
+. // set row name
+. putexcel B1="weekday"
+file ps4_q3c.xls saved
+
+. putexcel C1="winter"
+file ps4_q3c.xls saved
+
+. putexcel D1="centered_age"
+file ps4_q3c.xls saved
+
+. putexcel E1="centerd_age^2"
+file ps4_q3c.xls saved
+
+. putexcel F1="gender"
+file ps4_q3c.xls saved
+
+. putexcel G1="PIR"
+file ps4_q3c.xls saved
+
+. // put data in
+. putexcel B2=matrix(ratio)
+file ps4_q3c.xls saved
+
+. putexcel B5=matrix(margin)
+file ps4_q3c.xls saved
+
+. 
+. * Question 3.4 ---------------------------------------------------------------
+> -*
+. // fit model
+. meglm any_water i.weekday i.winter c.centered_age##c.centered_age i.riagendr c
+> entered_pir||seqn:, family(bernoulli) link(logit) or
+
+Fitting fixed-effects model:
+
+Iteration 0:   log likelihood = -9735.2368  
+Iteration 1:   log likelihood = -9720.6751  
+Iteration 2:   log likelihood = -9720.6693  
+Iteration 3:   log likelihood = -9720.6693  
+
+Refining starting values:
+
+Grid node 0:   log likelihood = -9388.2333
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -9388.2333  
+Iteration 1:   log likelihood = -9123.6173  
+Iteration 2:   log likelihood = -9083.9612  
+Iteration 3:   log likelihood = -9083.7617  
+Iteration 4:   log likelihood = -9083.7599  
+Iteration 5:   log likelihood = -9083.7599  
+
+Mixed-effects GLM                               Number of obs     =     17,263
+Family:               Bernoulli
+Link:                     logit
+Group variable:            seqn                 Number of groups  =      9,103
+
+                                                Obs per group:
+                                                              min =          1
+                                                              avg =        1.9
+                                                              max =          2
+
+Integration method: mvaghermite                 Integration pts.  =          7
+
+                                                Wald chi2(6)      =     347.77
+Log likelihood = -9083.7599                     Prob > chi2       =     0.0000
+-------------------------------------------------------------------------------
+    any_water | Odds Ratio   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+      weekday |
+           M  |   .9610319   .1297017    -0.29   0.768     .7376646    1.252036
+              |
+       winter |
+           Y  |    .920392   .0647149    -1.18   0.238     .8019049    1.056386
+ centered_age |   1.332258   .0270013    14.15   0.000     1.280374    1.386245
+              |
+           c. |
+ centered_age#|
+           c. |
+ centered_age |   .9619006   .0066036    -5.66   0.000     .9490444    .9749309
+              |
+   2.riagendr |   1.726474   .1219355     7.73   0.000     1.503289    1.982795
+ centered_pir |   1.165389   .0269681     6.61   0.000     1.113713    1.219462
+        _cons |   6.459822   .5338014    22.58   0.000      5.49392    7.595543
+--------------+----------------------------------------------------------------
+seqn          |
+    var(_cons)|   5.406034   .3435992                      4.772849     6.12322
+-------------------------------------------------------------------------------
+Note: Estimates are transformed only in the first equation.
+Note: _cons estimates baseline odds (conditional on zero random effects).
+LR test vs. logistic model: chibar2(01) = 1273.82     Prob >= chibar2 = 0.0000
+
+. matrix table1=r(table)
+
+. 
+. // compute marginal effects
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =     17,263
+Model VCE    : OIM
+
+Expression   : Marginal predicted mean, predict()
+dy/dx w.r.t. : 1.weekday 1.winter centered_age 2.riagendr centered_pir
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     weekday |
+          M  |  -.0042853   .0146051    -0.29   0.769    -.0329108    .0243402
+             |
+      winter |
+          Y  |  -.0089136   .0075559    -1.18   0.238     -.023723    .0058958
+centered_age |   .0330947   .0024825    13.33   0.000     .0282291    .0379603
+  2.riagendr |   .0587551   .0075287     7.80   0.000     .0439991    .0735111
+centered_pir |   .0164395   .0024638     6.67   0.000     .0116106    .0212685
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+
+. matrix table2=r(table)
+
+. 
+. // select data
+. mata
+------------------------------------------------- mata (type end to exit) ------
+: table1=st_matrix("table1")
+
+: table1=table1[(1,5,6),(2,4,5,6,8,9)]
+
+: st_matrix("ratio",table1)
+
+: table2=st_matrix("table2")
+
+: table2=table2[(1,5,6),(2,4,5,7,8)]
+
+: st_matrix("margin",table2)
+
+: end
+--------------------------------------------------------------------------------
+
+. 
+. // make table
+. putexcel set ps4_q3d.xls, replace
+Note: file will be replaced when the first putexcel command is issued
+
+. 
+. // set column name
+. putexcel A1=" "
+file ps4_q3d.xls saved
+
+. putexcel A2="ratio"
+file ps4_q3d.xls saved
+
+. putexcel A3="lwr"
+file ps4_q3d.xls saved
+
+. putexcel A4="upr"
+file ps4_q3d.xls saved
+
+. putexcel A5="margin"
+file ps4_q3d.xls saved
+
+. putexcel A6="lwr_margin"
+file ps4_q3d.xls saved
+
+. putexcel A7="upr_margin"
+file ps4_q3d.xls saved
+
+. 
+. // set row name
+. putexcel B1="weekday"
+file ps4_q3d.xls saved
+
+. putexcel C1="winter"
+file ps4_q3d.xls saved
+
+. putexcel D1="centered_age"
+file ps4_q3d.xls saved
+
+. putexcel E1="centerd_age^2"
+file ps4_q3d.xls saved
+
+. putexcel F1="gender"
+file ps4_q3d.xls saved
+
+. putexcel G1="PIR"
+file ps4_q3d.xls saved
+
+. 
+. // put data in
+. putexcel B2=matrix(ratio)
+file ps4_q3d.xls saved
+
+. putexcel B5=matrix(margin)
+file ps4_q3d.xls saved
+
+. 
+. // Note that two methods produce similar results and the result from logistic 
+. // model one is much more precise and can be put into good use.
+. 
+. log close
+      name:  <unnamed>
+       log:  C:\Users\lwenjing\Downloads\ps4\ps4_q3\ps4_q3.log
+  log type:  text
+ closed on:  18 Nov 2019, 12:27:14
+--------------------------------------------------------------------------------

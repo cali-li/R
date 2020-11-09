@@ -1,0 +1,321 @@
+------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\lwenjing\Downloads\ps4\ps4_q1\ps4_q1.log
+  log type:  text
+ opened on:  18 Nov 2019, 12:28:05
+
+. 
+. * Question 1 ---------------------------------------------------------------
+> ---*
+. // data prep
+. import delimited df.csv , clear
+(8 vars, 1,064 obs)
+
+. describe
+
+Contains data
+  obs:         1,064                          
+ vars:             8                          
+------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+------------------------------------------------------------------------------
+subject_nr      byte    %8.0g                 
+count_trial     byte    %8.0g                 
+tot_dist        float   %9.0g                 
+max_abs_dev     float   %9.0g                 
+avg_abs_dev     float   %9.0g                 
+auc             float   %9.0g                 AUC
+condition       str8    %9s                   Condition
+exemplar        str15   %15s                  Exemplar
+------------------------------------------------------------------------------
+Sorted by: 
+     Note: Dataset has changed since last saved.
+
+. encode condition, generate(newcondition)
+
+. 
+. // model for tot_dist
+. gen new_tot_dist= log(tot_dist)
+
+. mixed new_tot_dist newcondition || _all: R.subject_nr || _all: R.exemplar
+
+Performing EM optimization: 
+
+Performing gradient-based optimization: 
+
+Iteration 0:   log likelihood = -290.32937  
+Iteration 1:   log likelihood = -290.32937  
+
+Computing standard errors:
+
+Mixed-effects ML regression                     Number of obs     =      1,064
+Group variable: _all                            Number of groups  =          1
+
+                                                Obs per group:
+                                                              min =      1,064
+                                                              avg =    1,064.0
+                                                              max =      1,064
+
+                                                Wald chi2(1)      =      18.99
+Log likelihood = -290.32937                     Prob > chi2       =     0.0000
+
+------------------------------------------------------------------------------
+new_tot_dist |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+newcondition |  -.1613632   .0370304    -4.36   0.000    -.2339414    -.088785
+       _cons |   7.474353   .0660038   113.24   0.000     7.344988    7.603718
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+  Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
+-----------------------------+------------------------------------------------
+_all: Identity               |
+             var(R.subjec~r) |   .0089411   .0026381      .0050147    .0159418
+-----------------------------+------------------------------------------------
+_all: Identity               |
+             var(R.exemplar) |   .0038946   .0018468      .0015376    .0098648
+-----------------------------+------------------------------------------------
+               var(Residual) |   .0935915   .0042206      .0856743    .1022403
+------------------------------------------------------------------------------
+LR test vs. linear model: chi2(2) = 50.53                 Prob > chi2 = 0.0000
+
+Note: LR test is conservative and provided only for reference.
+
+. matrix table1=r(table)
+
+. 
+. // model for max_abs_dev
+. gen new_abs_dev= log(max_abs_dev)
+
+. mixed new_abs_dev newcondition || _all: R.subject_nr || _all: R.exemplar
+
+Performing EM optimization: 
+
+Performing gradient-based optimization: 
+
+Iteration 0:   log likelihood = -1626.4639  
+Iteration 1:   log likelihood = -1626.4639  
+
+Computing standard errors:
+
+Mixed-effects ML regression                     Number of obs     =      1,064
+Group variable: _all                            Number of groups  =          1
+
+                                                Obs per group:
+                                                              min =      1,064
+                                                              avg =    1,064.0
+                                                              max =      1,064
+
+                                                Wald chi2(1)      =      20.41
+Log likelihood = -1626.4639                     Prob > chi2       =     0.0000
+
+------------------------------------------------------------------------------
+ new_abs_dev |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+newcondition |  -.5099528   .1128828    -4.52   0.000    -.7311991   -.2887065
+       _cons |   5.787439   .2033416    28.46   0.000     5.388897    6.185981
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+  Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
+-----------------------------+------------------------------------------------
+_all: Identity               |
+             var(R.subjec~r) |   .1311094   .0361334      .0763915    .2250208
+-----------------------------+------------------------------------------------
+_all: Identity               |
+             var(R.exemplar) |   .0309788   .0171788      .0104482    .0918515
+-----------------------------+------------------------------------------------
+               var(Residual) |   1.151791   .0519265      1.054384    1.258197
+------------------------------------------------------------------------------
+LR test vs. linear model: chi2(2) = 54.27                 Prob > chi2 = 0.0000
+
+Note: LR test is conservative and provided only for reference.
+
+. matrix table2=r(table)
+
+. 
+. // model for avg_abs_dev
+. gen new_avg_dev= log(avg_abs_dev)
+
+. mixed new_avg_dev newcondition || _all: R.subject_nr || _all: R.exemplar
+
+Performing EM optimization: 
+
+Performing gradient-based optimization: 
+
+Iteration 0:   log likelihood =  -1797.123  
+Iteration 1:   log likelihood =  -1797.123  
+
+Computing standard errors:
+
+Mixed-effects ML regression                     Number of obs     =      1,064
+Group variable: _all                            Number of groups  =          1
+
+                                                Obs per group:
+                                                              min =      1,064
+                                                              avg =    1,064.0
+                                                              max =      1,064
+
+                                                Wald chi2(1)      =      25.09
+Log likelihood =  -1797.123                     Prob > chi2       =     0.0000
+
+------------------------------------------------------------------------------
+ new_avg_dev |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+newcondition |  -.6510174   .1299681    -5.01   0.000    -.9057503   -.3962846
+       _cons |   4.384032   .2366877    18.52   0.000     3.920132    4.847931
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+  Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
+-----------------------------+------------------------------------------------
+_all: Identity               |
+             var(R.subjec~r) |   .2456525   .0612652      .1506723    .4005059
+-----------------------------+------------------------------------------------
+_all: Identity               |
+             var(R.exemplar) |   .0402873   .0229428      .0131955    .1230012
+-----------------------------+------------------------------------------------
+               var(Residual) |   1.568348   .0706846      1.435751     1.71319
+------------------------------------------------------------------------------
+LR test vs. linear model: chi2(2) = 80.27                 Prob > chi2 = 0.0000
+
+Note: LR test is conservative and provided only for reference.
+
+. matrix table3=r(table)
+
+. 
+. // model for auc
+. gen new_auc= log(auc)
+(3 missing values generated)
+
+. mixed new_auc newcondition || _all: R.subject_nr || _all: R.exemplar
+
+Performing EM optimization: 
+
+Performing gradient-based optimization: 
+
+Iteration 0:   log likelihood = -1605.4614  
+Iteration 1:   log likelihood = -1605.4613  
+
+Computing standard errors:
+
+Mixed-effects ML regression                     Number of obs     =      1,061
+Group variable: _all                            Number of groups  =          1
+
+                                                Obs per group:
+                                                              min =      1,061
+                                                              avg =    1,061.0
+                                                              max =      1,061
+
+                                                Wald chi2(1)      =      17.48
+Log likelihood = -1605.4613                     Prob > chi2       =     0.0000
+
+------------------------------------------------------------------------------
+     new_auc |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+newcondition |  -.4055942   .0970002    -4.18   0.000    -.5957111   -.2154772
+       _cons |   11.82631   .1766093    66.96   0.000     11.48016    12.17246
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+  Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
+-----------------------------+------------------------------------------------
+_all: Identity               |
+             var(R.subjec~r) |   .1318176   .0358157      .0773921    .2245175
+-----------------------------+------------------------------------------------
+_all: Identity               |
+             var(R.exemplar) |    .017791   .0126617      .0044097     .071778
+-----------------------------+------------------------------------------------
+               var(Residual) |   1.120721   .0505865      1.025832    1.224387
+------------------------------------------------------------------------------
+LR test vs. linear model: chi2(2) = 53.07                 Prob > chi2 = 0.0000
+
+Note: LR test is conservative and provided only for reference.
+
+. matrix table4=r(table)
+
+. 
+. // select data
+. mata
+------------------------------------------------- mata (type end to exit) ----
+: table1=st_matrix("table1")
+
+: table1=table1[(1,5,6),1]
+
+: st_matrix("tot_dist",table1)
+
+: table2=st_matrix("table2")
+
+: table2=table2[(1,5,6),1]
+
+: st_matrix("max_abs_dev",table2)
+
+: table3=st_matrix("table3")
+
+: table3=table3[(1,5,6),1]
+
+: st_matrix("avg_abs_dev",table3)
+
+: table4=st_matrix("table4")
+
+: table4=table4[(1,5,6),1]
+
+: st_matrix("auc",table4)
+
+: end
+------------------------------------------------------------------------------
+
+. 
+. // make table
+. putexcel set ps4_q1.xls, replace
+Note: file will be replaced when the first putexcel command is issued
+
+. // set column name
+. putexcel A1=" "
+file ps4_q1.xls saved
+
+. putexcel A2="estimation"
+file ps4_q1.xls saved
+
+. putexcel A3="lwr"
+file ps4_q1.xls saved
+
+. putexcel A4="upr"
+file ps4_q1.xls saved
+
+. // set row name
+. putexcel B1="tot_dist"
+file ps4_q1.xls saved
+
+. putexcel C1="max_abs_dev"
+file ps4_q1.xls saved
+
+. putexcel D1="avg_abs_dev"
+file ps4_q1.xls saved
+
+. putexcel E1="auc"
+file ps4_q1.xls saved
+
+. // put data in
+. putexcel B2=matrix(tot_dist)
+file ps4_q1.xls saved
+
+. putexcel C2=matrix(max_abs_dev)
+file ps4_q1.xls saved
+
+. putexcel D2=matrix(avg_abs_dev)
+file ps4_q1.xls saved
+
+. putexcel E2=matrix(auc)
+file ps4_q1.xls saved
+
+. 
+. // Note that condition has the largest (relative) effect for avg_abs_dev.
+. 
+. log close
+      name:  <unnamed>
+       log:  C:\Users\lwenjing\Downloads\ps4\ps4_q1\ps4_q1.log
+  log type:  text
+ closed on:  18 Nov 2019, 12:28:12
+------------------------------------------------------------------------------

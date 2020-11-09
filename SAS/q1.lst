@@ -1,0 +1,209 @@
+116  /** libnames **/
+117  libname mylib 'C:/Users/lwenjing/Downloads/';
+NOTE: Libref MYLIB was successfully assigned as follows:
+      Engine:        V9
+      Physical Name: C:\Users\lwenjing\Downloads
+118  %let path= C:/Users/lwenjing/Downloads/;
+119
+120  /** import data **/
+121  proc import
+122    datafile = "&path./df.csv"
+123    out = mylib.ps6_q1_result
+124    replace;
+125   delimiter = ',';
+126   getnames = yes;
+127  run;
+
+128   /**********************************************************************
+129   *   PRODUCT:   SAS
+130   *   VERSION:   9.4
+131   *   CREATOR:   External File Interface
+132   *   DATE:      10DEC19
+133   *   DESC:      Generated SAS Datastep Code
+134   *   TEMPLATE SOURCE:  (None Specified.)
+135   ***********************************************************************/
+136      data MYLIB.PS6_Q1_RESULT    ;
+137      %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+138      infile 'C:/Users/lwenjing/Downloads//df.csv' delimiter = ',' MISSOVER DSD lrecl=32767
+138! firstobs=2 ;
+139         informat subject_nr best32. ;
+140         informat count_trial best32. ;
+141         informat tot_dist best32. ;
+142         informat max_abs_dev best32. ;
+143         informat avg_abs_dev best32. ;
+144         informat AUC best32. ;
+145         informat Condition $8. ;
+146         informat Exemplar $13. ;
+147         format subject_nr best12. ;
+148         format count_trial best12. ;
+149         format tot_dist best12. ;
+150         format max_abs_dev best12. ;
+151         format avg_abs_dev best12. ;
+152         format AUC best12. ;
+153         format Condition $8. ;
+154         format Exemplar $13. ;
+155      input
+156                  subject_nr
+157                  count_trial
+158                  tot_dist
+159                  max_abs_dev
+160                  avg_abs_dev
+161                  AUC
+162                  Condition  $
+163                  Exemplar  $
+164      ;
+165      if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection macro variable */
+166      run;
+
+NOTE: The infile 'C:/Users/lwenjing/Downloads//df.csv' is:
+      Filename=C:\Users\lwenjing\Downloads\\df.csv,
+      RECFM=V,LRECL=32767,File Size (bytes)=101011,
+      Last Modified=10Dec2019:15:46:10,
+      Create Time=10Dec2019:15:46:10
+
+NOTE: 1064 records were read from the infile 'C:/Users/lwenjing/Downloads//df.csv'.
+      The minimum record length was 78.
+      The maximum record length was 104.
+NOTE: The data set MYLIB.PS6_Q1_RESULT has 1064 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.07 seconds
+
+
+1064 rows created in MYLIB.PS6_Q1_RESULT from C:/Users/lwenjing/Downloads//df.csv.
+
+
+
+NOTE: MYLIB.PS6_Q1_RESULT data set was successfully created.
+NOTE: The data set MYLIB.PS6_Q1_RESULT has 1064 observations and 8 variables.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           0.26 seconds
+      cpu time            0.21 seconds
+
+
+167
+168  /** procs for inspecting data **/
+169  proc contents data=mylib.ps6_q1_result;
+170  run;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.05 seconds
+      cpu time            0.03 seconds
+
+
+171
+172  /** prepare response of data **/
+173  data ps6_q1_tot_dist;
+174   set mylib.ps6_q1_result;
+175   tot_dist_c = log(tot_dist);
+176  run;
+
+NOTE: There were 1064 observations read from the data set MYLIB.PS6_Q1_RESULT.
+NOTE: The data set WORK.PS6_Q1_TOT_DIST has 1064 observations and 9 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+
+
+177
+178  /** lmm model for tot_dist **/
+179  proc mixed data=ps6_q1_tot_dist;
+180   class subject_nr Exemplar Condition;
+181   model tot_dist_c = Condition / cl;
+182   random int / subject=subject_nr;
+183   random int / subject=Exemplar;
+184  run;
+
+NOTE: Convergence criteria met.
+NOTE: PROCEDURE MIXED used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.06 seconds
+
+
+185
+186  /** prepare response of data **/
+187  data ps6_q1_max_abs_dev;
+188   set mylib.ps6_q1_result;
+189   max_abs_dev_c = log(max_abs_dev);
+190  run;
+
+NOTE: There were 1064 observations read from the data set MYLIB.PS6_Q1_RESULT.
+NOTE: The data set WORK.PS6_Q1_MAX_ABS_DEV has 1064 observations and 9 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+
+
+191
+192  /** lmm model for max_abs_dev **/
+193  proc mixed data=ps6_q1_max_abs_dev;
+194   class subject_nr Exemplar Condition;
+195   model max_abs_dev_c = Condition / cl;
+196   random int / subject=subject_nr;
+197   random int / subject=Exemplar;
+198  run;
+
+NOTE: Convergence criteria met.
+NOTE: PROCEDURE MIXED used (Total process time):
+      real time           0.12 seconds
+      cpu time            0.09 seconds
+
+
+199
+200  /** prepare response of data **/
+201  data ps6_q1_avg_abs_dev;
+202   set mylib.ps6_q1_result;
+203   avg_abs_dev_c = log(avg_abs_dev);
+204  run;
+
+NOTE: There were 1064 observations read from the data set MYLIB.PS6_Q1_RESULT.
+NOTE: The data set WORK.PS6_Q1_AVG_ABS_DEV has 1064 observations and 9 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+
+
+205
+206  /** lmm model for avg_abs_dev **/
+207  proc mixed data=ps6_q1_avg_abs_dev;
+208   class subject_nr Exemplar Condition;
+209   model avg_abs_dev_c = Condition / cl;
+210   random int / subject=subject_nr;
+211   random int / subject=Exemplar;
+212  run;
+
+NOTE: Convergence criteria met.
+NOTE: PROCEDURE MIXED used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.07 seconds
+
+
+213
+214  /** prepare response of data **/
+215  data ps6_q1_auc;
+216   set mylib.ps6_q1_result;
+217   auc = log(abs(AUC));
+218  run;
+
+NOTE: There were 1064 observations read from the data set MYLIB.PS6_Q1_RESULT.
+NOTE: The data set WORK.PS6_Q1_AUC has 1064 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+
+
+219
+220  /** lmm model for auc **/
+221  proc mixed data=ps6_q1_auc;
+222   class subject_nr Exemplar Condition;
+223   model auc = Condition / cl;
+224   random int / subject=subject_nr;
+225   random int / subject=Exemplar;
+226  run;
+
+NOTE: Convergence criteria met.
+NOTE: PROCEDURE MIXED used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.06 seconds
+
+

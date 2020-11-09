@@ -1,0 +1,2932 @@
+227  libname brr_long 'C:/Users/lwenjing/Downloads/';
+NOTE: Libref BRR_LONG refers to the same physical library as MYLIB.
+NOTE: Libref BRR_LONG was successfully assigned as follows:
+      Engine:        V9
+      Physical Name: C:\Users\lwenjing\Downloads
+228  %let path= C:/Users/lwenjing/Downloads/;
+229
+230  /** import data **/
+231  proc import
+232    datafile = "&path./recs2015_public_v4.csv"
+233    out = brr_long.ps6_q2_result
+234    replace;
+235   delimiter = ',';
+236   getnames = yes;
+237  run;
+
+238   /**********************************************************************
+239   *   PRODUCT:   SAS
+240   *   VERSION:   9.4
+241   *   CREATOR:   External File Interface
+242   *   DATE:      10DEC19
+243   *   DESC:      Generated SAS Datastep Code
+244   *   TEMPLATE SOURCE:  (None Specified.)
+245   ***********************************************************************/
+246      data BRR_LONG.PS6_Q2_RESULT    ;
+247      %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+248      infile 'C:/Users/lwenjing/Downloads//recs2015_public_v4.csv' delimiter = ',' MISSOVER
+248! DSD lrecl=32767 firstobs=2 ;
+249         informat DOEID best32. ;
+250         informat REGIONC best32. ;
+251         informat DIVISION best32. ;
+252         informat METROMICRO $5. ;
+253         informat UATYP10 $1. ;
+254         informat TYPEHUQ best32. ;
+255         informat ZTYPEHUQ best32. ;
+256         informat CELLAR best32. ;
+257         informat ZCELLAR best32. ;
+258         informat BASEFIN best32. ;
+259         informat ZBASEFIN best32. ;
+260         informat ATTIC best32. ;
+261         informat ZATTIC best32. ;
+262         informat ATTICFIN best32. ;
+263         informat ZATTICFIN best32. ;
+264         informat STORIES best32. ;
+265         informat ZSTORIES best32. ;
+266         informat PRKGPLC1 best32. ;
+267         informat ZPRKGPLC1 best32. ;
+268         informat SIZEOFGARAGE best32. ;
+269         informat ZSIZEOFGARAGE best32. ;
+270         informat KOWNRENT best32. ;
+271         informat ZKOWNRENT best32. ;
+272         informat YEARMADERANGE best32. ;
+273         informat ZYEARMADERANGE best32. ;
+274         informat OCCUPYYRANGE best32. ;
+275         informat ZOCCUPYYRANGE best32. ;
+276         informat STUDIO best32. ;
+277         informat ZSTUDIO best32. ;
+278         informat BEDROOMS best32. ;
+279         informat ZBEDROOMS best32. ;
+280         informat NCOMBATH best32. ;
+281         informat ZNCOMBATH best32. ;
+282         informat NHAFBATH best32. ;
+283         informat ZNHAFBATH best32. ;
+284         informat OTHROOMS best32. ;
+285         informat ZOTHROOMS best32. ;
+286         informat TOTROOMS best32. ;
+287         informat ZTOTROOMS best32. ;
+288         informat WALLTYPE best32. ;
+289         informat ZWALLTYPE best32. ;
+290         informat ROOFTYPE best32. ;
+291         informat ZROOFTYPE best32. ;
+292         informat HIGHCEIL best32. ;
+293         informat ZHIGHCEIL best32. ;
+294         informat DOOR1SUM best32. ;
+295         informat ZDOOR1SUM best32. ;
+296         informat WINDOWS best32. ;
+297         informat ZWINDOWS best32. ;
+298         informat TYPEGLASS best32. ;
+299         informat ZTYPEGLASS best32. ;
+300         informat WINFRAME best32. ;
+301         informat ZWINFRAME best32. ;
+302         informat ADQINSUL best32. ;
+303         informat ZADQINSUL best32. ;
+304         informat DRAFTY best32. ;
+305         informat ZDRAFTY best32. ;
+306         informat UGASHERE best32. ;
+307         informat ZUGASHERE best32. ;
+308         informat SWIMPOOL best32. ;
+309         informat ZSWIMPOOL best32. ;
+310         informat MONPOOL best32. ;
+311         informat ZMONPOOL best32. ;
+312         informat POOL best32. ;
+313         informat ZPOOL best32. ;
+314         informat FUELPOOL best32. ;
+315         informat ZFUELPOOL best32. ;
+316         informat RECBATH best32. ;
+317         informat ZRECBATH best32. ;
+318         informat MONTUB best32. ;
+319         informat ZMONTUB best32. ;
+320         informat FUELTUB best32. ;
+321         informat ZFUELTUB best32. ;
+322         informat OUTLET best32. ;
+323         informat ZOUTLET best32. ;
+324         informat ALTFUELPEV best32. ;
+325         informat ZALTFUELPEV best32. ;
+326         informat BACKUP best32. ;
+327         informat ZBACKUP best32. ;
+328         informat SOLAR best32. ;
+329         informat NUMFRIG best32. ;
+330         informat ZNUMFRIG best32. ;
+331         informat SIZRFRI1 best32. ;
+332         informat ZSIZRFRI1 best32. ;
+333         informat TYPERFR1 best32. ;
+334         informat ZTYPERFR1 best32. ;
+335         informat AGERFRI1 best32. ;
+336         informat ZAGERFRI1 best32. ;
+337         informat ICE best32. ;
+338         informat ZICE best32. ;
+339         informat SIZRFRI2 best32. ;
+340         informat ZSIZRFRI2 best32. ;
+341         informat TYPERFR2 best32. ;
+342         informat ZTYPERFR2 best32. ;
+343         informat AGERFRI2 best32. ;
+344         informat ZAGERFRI2 best32. ;
+345         informat LOCRFRI2 best32. ;
+346         informat ZLOCRFRI2 best32. ;
+347         informat NUMFREEZ best32. ;
+348         informat ZNUMFREEZ best32. ;
+349         informat UPRTFRZR best32. ;
+350         informat ZUPRTFRZR best32. ;
+351         informat SIZFREEZ best32. ;
+352         informat ZSIZFREEZ best32. ;
+353         informat AGEFRZR best32. ;
+354         informat ZAGEFRZR best32. ;
+355         informat STOVEN best32. ;
+356         informat ZSTOVEN best32. ;
+357         informat STOVENFUEL best32. ;
+358         informat ZSTOVENFUEL best32. ;
+359         informat DUALCOOKTFUEL best32. ;
+360         informat ZDUALCOOKTFUEL best32. ;
+361         informat DUALOVENFUEL best32. ;
+362         informat ZDUALOVENFUEL best32. ;
+363         informat COOKTUSE best32. ;
+364         informat ZCOOKTUSE best32. ;
+365         informat OVENUSE best32. ;
+366         informat ZOVENUSE best32. ;
+367         informat STOVE best32. ;
+368         informat ZSTOVE best32. ;
+369         informat STOVEFUEL best32. ;
+370         informat ZSTOVEFUEL best32. ;
+371         informat SEPCOOKTUSE best32. ;
+372         informat ZSEPCOOKTUSE best32. ;
+373         informat OVEN best32. ;
+374         informat ZOVEN best32. ;
+375         informat OVENFUEL best32. ;
+376         informat ZOVENFUEL best32. ;
+377         informat SEPOVENUSE best32. ;
+378         informat ZSEPOVENUSE best32. ;
+379         informat MICRO best32. ;
+380         informat ZMICRO best32. ;
+381         informat AMTMICRO best32. ;
+382         informat ZAMTMICRO best32. ;
+383         informat OUTGRILL best32. ;
+384         informat ZOUTGRILL best32. ;
+385         informat OUTGRILLFUEL best32. ;
+386         informat ZOUTGRILLFUEL best32. ;
+387         informat NUMMEAL best32. ;
+388         informat ZNUMMEAL best32. ;
+389         informat TOAST best32. ;
+390         informat ZTOAST best32. ;
+391         informat TOASTOVN best32. ;
+392         informat ZTOASTOVN best32. ;
+393         informat COFFEE best32. ;
+394         informat ZCOFFEE best32. ;
+395         informat CROCKPOT best32. ;
+396         informat ZCROCKPOT best32. ;
+397         informat FOODPROC best32. ;
+398         informat ZFOODPROC best32. ;
+399         informat RICECOOK best32. ;
+400         informat ZRICECOOK best32. ;
+401         informat BLENDER best32. ;
+402         informat ZBLENDER best32. ;
+403         informat APPOTHER best32. ;
+404         informat ZAPPOTHER best32. ;
+405         informat DISHWASH best32. ;
+406         informat ZDISHWASH best32. ;
+407         informat DWASHUSE best32. ;
+408         informat ZDWASHUSE best32. ;
+409         informat DWCYCLE best32. ;
+410         informat ZDWCYCLE best32. ;
+411         informat AGEDW best32. ;
+412         informat ZAGEDW best32. ;
+413         informat CWASHER best32. ;
+414         informat ZCWASHER best32. ;
+415         informat TOPFRONT best32. ;
+416         informat ZTOPFRONT best32. ;
+417         informat WASHLOAD best32. ;
+418         informat ZWASHLOAD best32. ;
+419         informat WASHTEMP best32. ;
+420         informat ZWASHTEMP best32. ;
+421         informat RNSETEMP best32. ;
+422         informat ZRNSETEMP best32. ;
+423         informat AGECWASH best32. ;
+424         informat ZAGECWASH best32. ;
+425         informat DRYER best32. ;
+426         informat ZDRYER best32. ;
+427         informat DRYRFUEL best32. ;
+428         informat ZDRYRFUEL best32. ;
+429         informat DRYRUSE best32. ;
+430         informat ZDRYRUSE best32. ;
+431         informat AGECDRYER best32. ;
+432         informat ZAGECDRYER best32. ;
+433         informat TVCOLOR best32. ;
+434         informat ZTVCOLOR best32. ;
+435         informat TVSIZE1 best32. ;
+436         informat ZTVSIZE1 best32. ;
+437         informat TVTYPE1 best32. ;
+438         informat ZTVTYPE1 best32. ;
+439         informat TVONWD1 best32. ;
+440         informat ZTVONWD1 best32. ;
+441         informat TVONWE1 best32. ;
+442         informat ZTVONWE1 best32. ;
+443         informat TVSIZE2 best32. ;
+444         informat ZTVSIZE2 best32. ;
+445         informat TVTYPE2 best32. ;
+446         informat ZTVTYPE2 best32. ;
+447         informat TVONWD2 best32. ;
+448         informat ZTVONWD2 best32. ;
+449         informat TVONWE2 best32. ;
+450         informat ZTVONWE2 best32. ;
+451         informat CABLESAT best32. ;
+452         informat ZCABLESAT best32. ;
+453         informat COMBODVR best32. ;
+454         informat ZCOMBODVR best32. ;
+455         informat SEPDVR best32. ;
+456         informat ZSEPDVR best32. ;
+457         informat PLAYSTA best32. ;
+458         informat ZPLAYSTA best32. ;
+459         informat DVD best32. ;
+460         informat ZDVD best32. ;
+461         informat VCR best32. ;
+462         informat ZVCR best32. ;
+463         informat INTSTREAM best32. ;
+464         informat ZINTSTREAM best32. ;
+465         informat TVAUDIOSYS best32. ;
+466         informat ZTVAUDIOSYS best32. ;
+467         informat DESKTOP best32. ;
+468         informat ZDESKTOP best32. ;
+469         informat NUMLAPTOP best32. ;
+470         informat ZNUMLAPTOP best32. ;
+471         informat NUMTABLET best32. ;
+472         informat ZNUMTABLET best32. ;
+473         informat ELPERIPH best32. ;
+474         informat ZELPERIPH best32. ;
+475         informat NUMSMPHONE best32. ;
+476         informat ZNUMSMPHONE best32. ;
+477         informat CELLPHONE best32. ;
+478         informat ZCELLPHONE best32. ;
+479         informat INTERNET best32. ;
+480         informat ZINTERNET best32. ;
+481         informat INWIRELESS best32. ;
+482         informat ZINWIRELESS best32. ;
+483         informat HEATHOME best32. ;
+484         informat ZHEATHOME best32. ;
+485         informat DNTHEAT best32. ;
+486         informat ZDNTHEAT best32. ;
+487         informat EQUIPM best32. ;
+488         informat ZEQUIPM best32. ;
+489         informat FUELHEAT best32. ;
+490         informat ZFUELHEAT best32. ;
+491         informat EQUIPAGE best32. ;
+492         informat ZEQUIPAGE best32. ;
+493         informat THERMAIN best32. ;
+494         informat ZTHERMAIN best32. ;
+495         informat PROTHERM best32. ;
+496         informat ZPROTHERM best32. ;
+497         informat EQUIPMUSE best32. ;
+498         informat ZEQUIPMUSE best32. ;
+499         informat TEMPHOME best32. ;
+500         informat ZTEMPHOME best32. ;
+501         informat TEMPGONE best32. ;
+502         informat ZTEMPGONE best32. ;
+503         informat TEMPNITE best32. ;
+504         informat ZTEMPNITE best32. ;
+505         informat EQUIPAUX best32. ;
+506         informat ZEQUIPAUX best32. ;
+507         informat EQUIPAUXTYPE best32. ;
+508         informat ZEQUIPAUXTYPE best32. ;
+509         informat FUELAUX best32. ;
+510         informat ZFUELAUX best32. ;
+511         informat BASEHEAT best32. ;
+512         informat ZBASEHEAT best32. ;
+513         informat ATTCHEAT best32. ;
+514         informat ZATTCHEAT best32. ;
+515         informat GARGHEAT best32. ;
+516         informat ZGARGHEAT best32. ;
+517         informat MOISTURE best32. ;
+518         informat ZMOISTURE best32. ;
+519         informat USEMOISTURE best32. ;
+520         informat ZUSEMOISTURE best32. ;
+521         informat AIRCOND best32. ;
+522         informat ZAIRCOND best32. ;
+523         informat COOLTYPE best32. ;
+524         informat ZCOOLTYPE best32. ;
+525         informat CENACHP best32. ;
+526         informat ZCENACHP best32. ;
+527         informat AGECENAC best32. ;
+528         informat ZAGECENAC best32. ;
+529         informat THERMAINAC best32. ;
+530         informat ZTHERMAINAC best32. ;
+531         informat PROTHERMAC best32. ;
+532         informat ZPROTHERMAC best32. ;
+533         informat USECENAC best32. ;
+534         informat ZUSECENAC best32. ;
+535         informat NUMBERAC best32. ;
+536         informat ZNUMBERAC best32. ;
+537         informat WWACAGE best32. ;
+538         informat ZWWACAGE best32. ;
+539         informat USEWWAC best32. ;
+540         informat ZUSEWWAC best32. ;
+541         informat TEMPHOMEAC best32. ;
+542         informat ZTEMPHOMEAC best32. ;
+543         informat TEMPGONEAC best32. ;
+544         informat ZTEMPGONEAC best32. ;
+545         informat TEMPNITEAC best32. ;
+546         informat ZTEMPNITEAC best32. ;
+547         informat BASECOOL best32. ;
+548         informat ZBASECOOL best32. ;
+549         informat ATTCCOOL best32. ;
+550         informat ZATTCCOOL best32. ;
+551         informat GARGCOOL best32. ;
+552         informat ZGARGCOOL best32. ;
+553         informat SWAMPCOL best32. ;
+554         informat ZSWAMPCOL best32. ;
+555         informat NUMCFAN best32. ;
+556         informat ZNUMCFAN best32. ;
+557         informat NUMFLOORFAN best32. ;
+558         informat ZNUMFLOORFAN best32. ;
+559         informat NUMWHOLEFAN best32. ;
+560         informat ZNUMWHOLEFAN best32. ;
+561         informat NUMATTICFAN best32. ;
+562         informat ZNUMATTICFAN best32. ;
+563         informat NOTMOIST best32. ;
+564         informat ZNOTMOIST best32. ;
+565         informat USENOTMOIST best32. ;
+566         informat ZUSENOTMOIST best32. ;
+567         informat FUELH2O best32. ;
+568         informat ZFUELH2O best32. ;
+569         informat H2OHEATAPT best32. ;
+570         informat ZH2OHEATAPT best32. ;
+571         informat WHEATAGE best32. ;
+572         informat ZWHEATAGE best32. ;
+573         informat WHEATSIZ best32. ;
+574         informat ZWHEATSIZ best32. ;
+575         informat MORETHAN1H2O best32. ;
+576         informat ZMORETHAN1H2O best32. ;
+577         informat FUELH2O2 best32. ;
+578         informat ZFUELH2O2 best32. ;
+579         informat LGTINNUM best32. ;
+580         informat ZLGTINNUM best32. ;
+581         informat LGTIN4 best32. ;
+582         informat ZLGTIN4 best32. ;
+583         informat LGTINCAN best32. ;
+584         informat ZLGTINCAN best32. ;
+585         informat LGTINCFL best32. ;
+586         informat ZLGTINCFL best32. ;
+587         informat LGTINLED best32. ;
+588         informat ZLGTINLED best32. ;
+589         informat LGTINCNTL best32. ;
+590         informat ZLGTINCNTL best32. ;
+591         informat LGTOUTNUM best32. ;
+592         informat ZLGTOUTNUM best32. ;
+593         informat LGTOUTCNTL best32. ;
+594         informat ZLGTOUTCNTL best32. ;
+595         informat AUDIT best32. ;
+596         informat AUDITCHG best32. ;
+597         informat EELIGHTS best32. ;
+598         informat FREEAUDIT best32. ;
+599         informat REBATEAPP best32. ;
+600         informat RECYCAPP best32. ;
+601         informat TAXCREDITAPP best32. ;
+602         informat BENOTHER best32. ;
+603         informat ESCWASH best32. ;
+604         informat ESDISHW best32. ;
+605         informat ESDRYER best32. ;
+606         informat ESFREEZE best32. ;
+607         informat ESFRIG best32. ;
+608         informat ESLIGHT best32. ;
+609         informat ESWATER best32. ;
+610         informat ESWIN best32. ;
+611         informat SMARTTHERM best32. ;
+612         informat ELPAY best32. ;
+613         informat ZELPAY best32. ;
+614         informat NGPAY best32. ;
+615         informat ZNGPAY best32. ;
+616         informat LPGPAY best32. ;
+617         informat ZLPGPAY best32. ;
+618         informat FOPAY best32. ;
+619         informat ZFOPAY best32. ;
+620         informat SMARTMETER best32. ;
+621         informat INTDATA best32. ;
+622         informat INTDATAACC best32. ;
+623         informat HHSEX best32. ;
+624         informat ZHHSEX best32. ;
+625         informat HHAGE best32. ;
+626         informat ZHHAGE best32. ;
+627         informat EMPLOYHH best32. ;
+628         informat ZEMPLOYHH best32. ;
+629         informat SDESCENT best32. ;
+630         informat ZSDESCENT best32. ;
+631         informat HOUSEHOLDER_RACE best32. ;
+632         informat ZHOUSEHOLDER_RACE best32. ;
+633         informat EDUCATION best32. ;
+634         informat ZEDUCATION best32. ;
+635         informat NHSLDMEM best32. ;
+636         informat ZNHSLDMEM best32. ;
+637         informat NUMADULT best32. ;
+638         informat ZNUMADULT best32. ;
+639         informat NUMCHILD best32. ;
+640         informat ZNUMCHILD best32. ;
+641         informat ATHOME best32. ;
+642         informat ZATHOME best32. ;
+643         informat MONEYPY best32. ;
+644         informat ZMONEYPY best32. ;
+645         informat ENERGYASST best32. ;
+646         informat ZENERGYASST best32. ;
+647         informat ENERGYASST11 best32. ;
+648         informat ZENERGYASST11 best32. ;
+649         informat ENERGYASST12 best32. ;
+650         informat ZENERGYASST12 best32. ;
+651         informat ENERGYASST13 best32. ;
+652         informat ZENERGYASST13 best32. ;
+653         informat ENERGYASST14 best32. ;
+654         informat ZENERGYASST14 best32. ;
+655         informat ENERGYASST15 best32. ;
+656         informat ZENERGYASST15 best32. ;
+657         informat ENERGYASSTOTH best32. ;
+658         informat ZENERGYASSTOTH best32. ;
+659         informat SCALEB best32. ;
+660         informat ZSCALEB best32. ;
+661         informat SCALEG best32. ;
+662         informat ZSCALEG best32. ;
+663         informat SCALEE best32. ;
+664         informat ZSCALEE best32. ;
+665         informat PAYHELP best32. ;
+666         informat ZPAYHELP best32. ;
+667         informat NOHEATBROKE best32. ;
+668         informat ZNOHEATBROKE best32. ;
+669         informat NOHEATEL best32. ;
+670         informat ZNOHEATEL best32. ;
+671         informat NOHEATNG best32. ;
+672         informat ZNOHEATNG best32. ;
+673         informat NOHEATBULK best32. ;
+674         informat ZNOHEATBULK best32. ;
+675         informat NOHEATDAYS best32. ;
+676         informat ZNOHEATDAYS best32. ;
+677         informat NOHEATHELP best32. ;
+678         informat ZNOHEATHELP best32. ;
+679         informat COLDMA best32. ;
+680         informat ZCOLDMA best32. ;
+681         informat NOACBROKE best32. ;
+682         informat ZNOACBROKE best32. ;
+683         informat NOACEL best32. ;
+684         informat ZNOACEL best32. ;
+685         informat NOACDAYS best32. ;
+686         informat ZNOACDAYS best32. ;
+687         informat NOACHELP best32. ;
+688         informat ZNOACHELP best32. ;
+689         informat HOTMA best32. ;
+690         informat ZHOTMA best32. ;
+691         informat USEEL best32. ;
+692         informat ELWARM best32. ;
+693         informat ELCOOL best32. ;
+694         informat ELWATER best32. ;
+695         informat ELFOOD best32. ;
+696         informat ELOTHER best32. ;
+697         informat USENG best32. ;
+698         informat UGWARM best32. ;
+699         informat UGWATER best32. ;
+700         informat UGCOOK best32. ;
+701         informat UGOTH best32. ;
+702         informat USELP best32. ;
+703         informat LPWARM best32. ;
+704         informat LPWATER best32. ;
+705         informat LPCOOK best32. ;
+706         informat LPOTHER best32. ;
+707         informat USEFO best32. ;
+708         informat FOWARM best32. ;
+709         informat FOWATER best32. ;
+710         informat FOOTHER best32. ;
+711         informat USEWOOD best32. ;
+712         informat WOODLOGS best32. ;
+713         informat ZWOODLOGS best32. ;
+714         informat WDPELLET best32. ;
+715         informat ZWDPELLET best32. ;
+716         informat WDOTHER best32. ;
+717         informat WDWARM best32. ;
+718         informat WDWATER best32. ;
+719         informat USESOLAR best32. ;
+720         informat SOLWATER best32. ;
+721         informat SOLOTHER best32. ;
+722         informat TOTCSQFT best32. ;
+723         informat TOTHSQFT best32. ;
+724         informat TOTSQFT_EN best32. ;
+725         informat ZTOTSQFT_EN best32. ;
+726         informat TOTUCSQFT best32. ;
+727         informat TOTUSQFT best32. ;
+728         informat NWEIGHT best32. ;
+729         informat BRRWT1 best32. ;
+730         informat BRRWT2 best32. ;
+731         informat BRRWT3 best32. ;
+732         informat BRRWT4 best32. ;
+733         informat BRRWT5 best32. ;
+734         informat BRRWT6 best32. ;
+735         informat BRRWT7 best32. ;
+736         informat BRRWT8 best32. ;
+737         informat BRRWT9 best32. ;
+738         informat BRRWT10 best32. ;
+739         informat BRRWT11 best32. ;
+740         informat BRRWT12 best32. ;
+741         informat BRRWT13 best32. ;
+742         informat BRRWT14 best32. ;
+743         informat BRRWT15 best32. ;
+744         informat BRRWT16 best32. ;
+745         informat BRRWT17 best32. ;
+746         informat BRRWT18 best32. ;
+747         informat BRRWT19 best32. ;
+748         informat BRRWT20 best32. ;
+749         informat BRRWT21 best32. ;
+750         informat BRRWT22 best32. ;
+751         informat BRRWT23 best32. ;
+752         informat BRRWT24 best32. ;
+753         informat BRRWT25 best32. ;
+754         informat BRRWT26 best32. ;
+755         informat BRRWT27 best32. ;
+756         informat BRRWT28 best32. ;
+757         informat BRRWT29 best32. ;
+758         informat BRRWT30 best32. ;
+759         informat BRRWT31 best32. ;
+760         informat BRRWT32 best32. ;
+761         informat BRRWT33 best32. ;
+762         informat BRRWT34 best32. ;
+763         informat BRRWT35 best32. ;
+764         informat BRRWT36 best32. ;
+765         informat BRRWT37 best32. ;
+766         informat BRRWT38 best32. ;
+767         informat BRRWT39 best32. ;
+768         informat BRRWT40 best32. ;
+769         informat BRRWT41 best32. ;
+770         informat BRRWT42 best32. ;
+771         informat BRRWT43 best32. ;
+772         informat BRRWT44 best32. ;
+773         informat BRRWT45 best32. ;
+774         informat BRRWT46 best32. ;
+775         informat BRRWT47 best32. ;
+776         informat BRRWT48 best32. ;
+777         informat BRRWT49 best32. ;
+778         informat BRRWT50 best32. ;
+779         informat BRRWT51 best32. ;
+780         informat BRRWT52 best32. ;
+781         informat BRRWT53 best32. ;
+782         informat BRRWT54 best32. ;
+783         informat BRRWT55 best32. ;
+784         informat BRRWT56 best32. ;
+785         informat BRRWT57 best32. ;
+786         informat BRRWT58 best32. ;
+787         informat BRRWT59 best32. ;
+788         informat BRRWT60 best32. ;
+789         informat BRRWT61 best32. ;
+790         informat BRRWT62 best32. ;
+791         informat BRRWT63 best32. ;
+792         informat BRRWT64 best32. ;
+793         informat BRRWT65 best32. ;
+794         informat BRRWT66 best32. ;
+795         informat BRRWT67 best32. ;
+796         informat BRRWT68 best32. ;
+797         informat BRRWT69 best32. ;
+798         informat BRRWT70 best32. ;
+799         informat BRRWT71 best32. ;
+800         informat BRRWT72 best32. ;
+801         informat BRRWT73 best32. ;
+802         informat BRRWT74 best32. ;
+803         informat BRRWT75 best32. ;
+804         informat BRRWT76 best32. ;
+805         informat BRRWT77 best32. ;
+806         informat BRRWT78 best32. ;
+807         informat BRRWT79 best32. ;
+808         informat BRRWT80 best32. ;
+809         informat BRRWT81 best32. ;
+810         informat BRRWT82 best32. ;
+811         informat BRRWT83 best32. ;
+812         informat BRRWT84 best32. ;
+813         informat BRRWT85 best32. ;
+814         informat BRRWT86 best32. ;
+815         informat BRRWT87 best32. ;
+816         informat BRRWT88 best32. ;
+817         informat BRRWT89 best32. ;
+818         informat BRRWT90 best32. ;
+819         informat BRRWT91 best32. ;
+820         informat BRRWT92 best32. ;
+821         informat BRRWT93 best32. ;
+822         informat BRRWT94 best32. ;
+823         informat BRRWT95 best32. ;
+824         informat BRRWT96 best32. ;
+825         informat CDD30YR best32. ;
+826         informat CDD65 best32. ;
+827         informat CDD80 best32. ;
+828         informat CLIMATE_REGION_PUB $17. ;
+829         informat IECC_CLIMATE_PUB $5. ;
+830         informat HDD30YR best32. ;
+831         informat HDD65 best32. ;
+832         informat HDD50 best32. ;
+833         informat GNDHDD65 best32. ;
+834         informat WSF best32. ;
+835         informat OA_LAT best32. ;
+836         informat GWT best32. ;
+837         informat DBT1 best32. ;
+838         informat DBT99 best32. ;
+839         informat KWH best32. ;
+840         informat KWHSPH best32. ;
+841         informat KWHCOL best32. ;
+842         informat KWHWTH best32. ;
+843         informat KWHRFG best32. ;
+844         informat KWHRFG1 best32. ;
+845         informat KWHRFG2 best32. ;
+846         informat KWHFRZ best32. ;
+847         informat KWHCOK best32. ;
+848         informat KWHMICRO best32. ;
+849         informat KWHCW best32. ;
+850         informat KWHCDR best32. ;
+851         informat KWHDWH best32. ;
+852         informat KWHLGT best32. ;
+853         informat KWHTVREL best32. ;
+854         informat KWHTV1 best32. ;
+855         informat KWHTV2 best32. ;
+856         informat KWHAHUHEAT best32. ;
+857         informat KWHAHUCOL best32. ;
+858         informat KWHEVAPCOL best32. ;
+859         informat KWHCFAN best32. ;
+860         informat KWHDHUM best32. ;
+861         informat KWHHUM best32. ;
+862         informat KWHPLPMP best32. ;
+863         informat KWHHTBPMP best32. ;
+864         informat KWHHTBHEAT best32. ;
+865         informat KWHNEC best32. ;
+866         informat BTUEL best32. ;
+867         informat BTUELSPH best32. ;
+868         informat BTUELCOL best32. ;
+869         informat BTUELWTH best32. ;
+870         informat BTUELRFG best32. ;
+871         informat BTUELRFG1 best32. ;
+872         informat BTUELRFG2 best32. ;
+873         informat BTUELFRZ best32. ;
+874         informat BTUELCOK best32. ;
+875         informat BTUELMICRO best32. ;
+876         informat BTUELCW best32. ;
+877         informat BTUELCDR best32. ;
+878         informat BTUELDWH best32. ;
+879         informat BTUELLGT best32. ;
+880         informat BTUELTVREL best32. ;
+881         informat BTUELTV1 best32. ;
+882         informat BTUELTV2 best32. ;
+883         informat BTUELAHUHEAT best32. ;
+884         informat BTUELAHUCOL best32. ;
+885         informat BTUELEVAPCOL best32. ;
+886         informat BTUELCFAN best32. ;
+887         informat BTUELDHUM best32. ;
+888         informat BTUELHUM best32. ;
+889         informat BTUELPLPMP best32. ;
+890         informat BTUELHTBPMP best32. ;
+891         informat BTUELHTBHEAT best32. ;
+892         informat BTUELNEC best32. ;
+893         informat DOLLAREL best32. ;
+894         informat DOLELSPH best32. ;
+895         informat DOLELCOL best32. ;
+896         informat DOLELWTH best32. ;
+897         informat DOLELRFG best32. ;
+898         informat DOLELRFG1 best32. ;
+899         informat DOLELRFG2 best32. ;
+900         informat DOLELFRZ best32. ;
+901         informat DOLELCOK best32. ;
+902         informat DOLELMICRO best32. ;
+903         informat DOLELCW best32. ;
+904         informat DOLELCDR best32. ;
+905         informat DOLELDWH best32. ;
+906         informat DOLELLGT best32. ;
+907         informat DOLELTVREL best32. ;
+908         informat DOLELTV1 best32. ;
+909         informat DOLELTV2 best32. ;
+910         informat DOLELAHUHEAT best32. ;
+911         informat DOLELAHUCOL best32. ;
+912         informat DOLELEVAPCOL best32. ;
+913         informat DOLELCFAN best32. ;
+914         informat DOLELDHUM best32. ;
+915         informat DOLELHUM best32. ;
+916         informat DOLELPLPMP best32. ;
+917         informat DOLELHTBPMP best32. ;
+918         informat DOLELHTBHEAT best32. ;
+919         informat DOLELNEC best32. ;
+920         informat CUFEETNG best32. ;
+921         informat CUFEETNGSPH best32. ;
+922         informat CUFEETNGWTH best32. ;
+923         informat CUFEETNGCOK best32. ;
+924         informat CUFEETNGCDR best32. ;
+925         informat CUFEETNGPLHEAT best32. ;
+926         informat CUFEETNGHTBHEAT best32. ;
+927         informat CUFEETNGNEC best32. ;
+928         informat BTUNG best32. ;
+929         informat BTUNGSPH best32. ;
+930         informat BTUNGWTH best32. ;
+931         informat BTUNGCOK best32. ;
+932         informat BTUNGCDR best32. ;
+933         informat BTUNGPLHEAT best32. ;
+934         informat BTUNGHTBHEAT best32. ;
+935         informat BTUNGNEC best32. ;
+936         informat DOLLARNG best32. ;
+937         informat DOLNGSPH best32. ;
+938         informat DOLNGWTH best32. ;
+939         informat DOLNGCOK best32. ;
+940         informat DOLNGCDR best32. ;
+941         informat DOLNGPLHEAT best32. ;
+942         informat DOLNGHTBHEAT best32. ;
+943         informat DOLNGNEC best32. ;
+944         informat GALLONLP best32. ;
+945         informat GALLONLPSPH best32. ;
+946         informat GALLONLPWTH best32. ;
+947         informat GALLONLPCOK best32. ;
+948         informat GALLONLPCDR best32. ;
+949         informat GALLONLPNEC best32. ;
+950         informat BTULP best32. ;
+951         informat BTULPSPH best32. ;
+952         informat BTULPWTH best32. ;
+953         informat BTULPCOK best32. ;
+954         informat BTULPCDR best32. ;
+955         informat BTULPNEC best32. ;
+956         informat DOLLARLP best32. ;
+957         informat DOLLPSPH best32. ;
+958         informat DOLLPWTH best32. ;
+959         informat DOLLPCOK best32. ;
+960         informat DOLLPCDR best32. ;
+961         informat DOLLPNEC best32. ;
+962         informat GALLONFO best32. ;
+963         informat GALLONFOSPH best32. ;
+964         informat GALLONFOWTH best32. ;
+965         informat GALLONFONEC best32. ;
+966         informat BTUFO best32. ;
+967         informat BTUFOSPH best32. ;
+968         informat BTUFOWTH best32. ;
+969         informat BTUFONEC best32. ;
+970         informat DOLLARFO best32. ;
+971         informat DOLFOSPH best32. ;
+972         informat DOLFOWTH best32. ;
+973         informat DOLFONEC best32. ;
+974         informat TOTALBTU best32. ;
+975         informat TOTALDOL best32. ;
+976         informat TOTALBTUSPH best32. ;
+977         informat TOTALDOLSPH best32. ;
+978         informat TOTALBTUWTH best32. ;
+979         informat TOTALDOLWTH best32. ;
+980         informat TOTALBTUCOK best32. ;
+981         informat TOTALDOLCOK best32. ;
+982         informat TOTALBTUCDR best32. ;
+983         informat TOTALDOLCDR best32. ;
+984         informat TOTALBTUPL best32. ;
+985         informat TOTALDOLPL best32. ;
+986         informat TOTALBTUHTB best32. ;
+987         informat TOTALDOLHTB best32. ;
+988         informat TOTALBTUNEC best32. ;
+989         informat TOTALDOLNEC best32. ;
+990         informat WOODAMT best32. ;
+991         informat ZWOODAMT best32. ;
+992         informat WOODBTU best32. ;
+993         informat PELLETAMT best32. ;
+994         informat ZPELLETAMT best32. ;
+995         informat PELLETBTU best32. ;
+996         informat ELXBTU best32. ;
+997         informat PERIODEL best32. ;
+998         informat ZELAMOUNT best32. ;
+999         informat NGXBTU best32. ;
+1000         informat PERIODNG best32. ;
+1001         informat ZNGAMOUNT best32. ;
+1002         informat FOXBTU best32. ;
+1003         informat PERIODFO best32. ;
+1004         informat ZFOAMOUNT best32. ;
+1005         informat LPXBTU best32. ;
+1006         informat PERIODLP best32. ;
+1007         informat ZLPAMOUNT best32. ;
+1008         format DOEID best12. ;
+1009         format REGIONC best12. ;
+1010         format DIVISION best12. ;
+1011         format METROMICRO $5. ;
+1012         format UATYP10 $1. ;
+1013         format TYPEHUQ best12. ;
+1014         format ZTYPEHUQ best12. ;
+1015         format CELLAR best12. ;
+1016         format ZCELLAR best12. ;
+1017         format BASEFIN best12. ;
+1018         format ZBASEFIN best12. ;
+1019         format ATTIC best12. ;
+1020         format ZATTIC best12. ;
+1021         format ATTICFIN best12. ;
+1022         format ZATTICFIN best12. ;
+1023         format STORIES best12. ;
+1024         format ZSTORIES best12. ;
+1025         format PRKGPLC1 best12. ;
+1026         format ZPRKGPLC1 best12. ;
+1027         format SIZEOFGARAGE best12. ;
+1028         format ZSIZEOFGARAGE best12. ;
+1029         format KOWNRENT best12. ;
+1030         format ZKOWNRENT best12. ;
+1031         format YEARMADERANGE best12. ;
+1032         format ZYEARMADERANGE best12. ;
+1033         format OCCUPYYRANGE best12. ;
+1034         format ZOCCUPYYRANGE best12. ;
+1035         format STUDIO best12. ;
+1036         format ZSTUDIO best12. ;
+1037         format BEDROOMS best12. ;
+1038         format ZBEDROOMS best12. ;
+1039         format NCOMBATH best12. ;
+1040         format ZNCOMBATH best12. ;
+1041         format NHAFBATH best12. ;
+1042         format ZNHAFBATH best12. ;
+1043         format OTHROOMS best12. ;
+1044         format ZOTHROOMS best12. ;
+1045         format TOTROOMS best12. ;
+1046         format ZTOTROOMS best12. ;
+1047         format WALLTYPE best12. ;
+1048         format ZWALLTYPE best12. ;
+1049         format ROOFTYPE best12. ;
+1050         format ZROOFTYPE best12. ;
+1051         format HIGHCEIL best12. ;
+1052         format ZHIGHCEIL best12. ;
+1053         format DOOR1SUM best12. ;
+1054         format ZDOOR1SUM best12. ;
+1055         format WINDOWS best12. ;
+1056         format ZWINDOWS best12. ;
+1057         format TYPEGLASS best12. ;
+1058         format ZTYPEGLASS best12. ;
+1059         format WINFRAME best12. ;
+1060         format ZWINFRAME best12. ;
+1061         format ADQINSUL best12. ;
+1062         format ZADQINSUL best12. ;
+1063         format DRAFTY best12. ;
+1064         format ZDRAFTY best12. ;
+1065         format UGASHERE best12. ;
+1066         format ZUGASHERE best12. ;
+1067         format SWIMPOOL best12. ;
+1068         format ZSWIMPOOL best12. ;
+1069         format MONPOOL best12. ;
+1070         format ZMONPOOL best12. ;
+1071         format POOL best12. ;
+1072         format ZPOOL best12. ;
+1073         format FUELPOOL best12. ;
+1074         format ZFUELPOOL best12. ;
+1075         format RECBATH best12. ;
+1076         format ZRECBATH best12. ;
+1077         format MONTUB best12. ;
+1078         format ZMONTUB best12. ;
+1079         format FUELTUB best12. ;
+1080         format ZFUELTUB best12. ;
+1081         format OUTLET best12. ;
+1082         format ZOUTLET best12. ;
+1083         format ALTFUELPEV best12. ;
+1084         format ZALTFUELPEV best12. ;
+1085         format BACKUP best12. ;
+1086         format ZBACKUP best12. ;
+1087         format SOLAR best12. ;
+1088         format NUMFRIG best12. ;
+1089         format ZNUMFRIG best12. ;
+1090         format SIZRFRI1 best12. ;
+1091         format ZSIZRFRI1 best12. ;
+1092         format TYPERFR1 best12. ;
+1093         format ZTYPERFR1 best12. ;
+1094         format AGERFRI1 best12. ;
+1095         format ZAGERFRI1 best12. ;
+1096         format ICE best12. ;
+1097         format ZICE best12. ;
+1098         format SIZRFRI2 best12. ;
+1099         format ZSIZRFRI2 best12. ;
+1100         format TYPERFR2 best12. ;
+1101         format ZTYPERFR2 best12. ;
+1102         format AGERFRI2 best12. ;
+1103         format ZAGERFRI2 best12. ;
+1104         format LOCRFRI2 best12. ;
+1105         format ZLOCRFRI2 best12. ;
+1106         format NUMFREEZ best12. ;
+1107         format ZNUMFREEZ best12. ;
+1108         format UPRTFRZR best12. ;
+1109         format ZUPRTFRZR best12. ;
+1110         format SIZFREEZ best12. ;
+1111         format ZSIZFREEZ best12. ;
+1112         format AGEFRZR best12. ;
+1113         format ZAGEFRZR best12. ;
+1114         format STOVEN best12. ;
+1115         format ZSTOVEN best12. ;
+1116         format STOVENFUEL best12. ;
+1117         format ZSTOVENFUEL best12. ;
+1118         format DUALCOOKTFUEL best12. ;
+1119         format ZDUALCOOKTFUEL best12. ;
+1120         format DUALOVENFUEL best12. ;
+1121         format ZDUALOVENFUEL best12. ;
+1122         format COOKTUSE best12. ;
+1123         format ZCOOKTUSE best12. ;
+1124         format OVENUSE best12. ;
+1125         format ZOVENUSE best12. ;
+1126         format STOVE best12. ;
+1127         format ZSTOVE best12. ;
+1128         format STOVEFUEL best12. ;
+1129         format ZSTOVEFUEL best12. ;
+1130         format SEPCOOKTUSE best12. ;
+1131         format ZSEPCOOKTUSE best12. ;
+1132         format OVEN best12. ;
+1133         format ZOVEN best12. ;
+1134         format OVENFUEL best12. ;
+1135         format ZOVENFUEL best12. ;
+1136         format SEPOVENUSE best12. ;
+1137         format ZSEPOVENUSE best12. ;
+1138         format MICRO best12. ;
+1139         format ZMICRO best12. ;
+1140         format AMTMICRO best12. ;
+1141         format ZAMTMICRO best12. ;
+1142         format OUTGRILL best12. ;
+1143         format ZOUTGRILL best12. ;
+1144         format OUTGRILLFUEL best12. ;
+1145         format ZOUTGRILLFUEL best12. ;
+1146         format NUMMEAL best12. ;
+1147         format ZNUMMEAL best12. ;
+1148         format TOAST best12. ;
+1149         format ZTOAST best12. ;
+1150         format TOASTOVN best12. ;
+1151         format ZTOASTOVN best12. ;
+1152         format COFFEE best12. ;
+1153         format ZCOFFEE best12. ;
+1154         format CROCKPOT best12. ;
+1155         format ZCROCKPOT best12. ;
+1156         format FOODPROC best12. ;
+1157         format ZFOODPROC best12. ;
+1158         format RICECOOK best12. ;
+1159         format ZRICECOOK best12. ;
+1160         format BLENDER best12. ;
+1161         format ZBLENDER best12. ;
+1162         format APPOTHER best12. ;
+1163         format ZAPPOTHER best12. ;
+1164         format DISHWASH best12. ;
+1165         format ZDISHWASH best12. ;
+1166         format DWASHUSE best12. ;
+1167         format ZDWASHUSE best12. ;
+1168         format DWCYCLE best12. ;
+1169         format ZDWCYCLE best12. ;
+1170         format AGEDW best12. ;
+1171         format ZAGEDW best12. ;
+1172         format CWASHER best12. ;
+1173         format ZCWASHER best12. ;
+1174         format TOPFRONT best12. ;
+1175         format ZTOPFRONT best12. ;
+1176         format WASHLOAD best12. ;
+1177         format ZWASHLOAD best12. ;
+1178         format WASHTEMP best12. ;
+1179         format ZWASHTEMP best12. ;
+1180         format RNSETEMP best12. ;
+1181         format ZRNSETEMP best12. ;
+1182         format AGECWASH best12. ;
+1183         format ZAGECWASH best12. ;
+1184         format DRYER best12. ;
+1185         format ZDRYER best12. ;
+1186         format DRYRFUEL best12. ;
+1187         format ZDRYRFUEL best12. ;
+1188         format DRYRUSE best12. ;
+1189         format ZDRYRUSE best12. ;
+1190         format AGECDRYER best12. ;
+1191         format ZAGECDRYER best12. ;
+1192         format TVCOLOR best12. ;
+1193         format ZTVCOLOR best12. ;
+1194         format TVSIZE1 best12. ;
+1195         format ZTVSIZE1 best12. ;
+1196         format TVTYPE1 best12. ;
+1197         format ZTVTYPE1 best12. ;
+1198         format TVONWD1 best12. ;
+1199         format ZTVONWD1 best12. ;
+1200         format TVONWE1 best12. ;
+1201         format ZTVONWE1 best12. ;
+1202         format TVSIZE2 best12. ;
+1203         format ZTVSIZE2 best12. ;
+1204         format TVTYPE2 best12. ;
+1205         format ZTVTYPE2 best12. ;
+1206         format TVONWD2 best12. ;
+1207         format ZTVONWD2 best12. ;
+1208         format TVONWE2 best12. ;
+1209         format ZTVONWE2 best12. ;
+1210         format CABLESAT best12. ;
+1211         format ZCABLESAT best12. ;
+1212         format COMBODVR best12. ;
+1213         format ZCOMBODVR best12. ;
+1214         format SEPDVR best12. ;
+1215         format ZSEPDVR best12. ;
+1216         format PLAYSTA best12. ;
+1217         format ZPLAYSTA best12. ;
+1218         format DVD best12. ;
+1219         format ZDVD best12. ;
+1220         format VCR best12. ;
+1221         format ZVCR best12. ;
+1222         format INTSTREAM best12. ;
+1223         format ZINTSTREAM best12. ;
+1224         format TVAUDIOSYS best12. ;
+1225         format ZTVAUDIOSYS best12. ;
+1226         format DESKTOP best12. ;
+1227         format ZDESKTOP best12. ;
+1228         format NUMLAPTOP best12. ;
+1229         format ZNUMLAPTOP best12. ;
+1230         format NUMTABLET best12. ;
+1231         format ZNUMTABLET best12. ;
+1232         format ELPERIPH best12. ;
+1233         format ZELPERIPH best12. ;
+1234         format NUMSMPHONE best12. ;
+1235         format ZNUMSMPHONE best12. ;
+1236         format CELLPHONE best12. ;
+1237         format ZCELLPHONE best12. ;
+1238         format INTERNET best12. ;
+1239         format ZINTERNET best12. ;
+1240         format INWIRELESS best12. ;
+1241         format ZINWIRELESS best12. ;
+1242         format HEATHOME best12. ;
+1243         format ZHEATHOME best12. ;
+1244         format DNTHEAT best12. ;
+1245         format ZDNTHEAT best12. ;
+1246         format EQUIPM best12. ;
+1247         format ZEQUIPM best12. ;
+1248         format FUELHEAT best12. ;
+1249         format ZFUELHEAT best12. ;
+1250         format EQUIPAGE best12. ;
+1251         format ZEQUIPAGE best12. ;
+1252         format THERMAIN best12. ;
+1253         format ZTHERMAIN best12. ;
+1254         format PROTHERM best12. ;
+1255         format ZPROTHERM best12. ;
+1256         format EQUIPMUSE best12. ;
+1257         format ZEQUIPMUSE best12. ;
+1258         format TEMPHOME best12. ;
+1259         format ZTEMPHOME best12. ;
+1260         format TEMPGONE best12. ;
+1261         format ZTEMPGONE best12. ;
+1262         format TEMPNITE best12. ;
+1263         format ZTEMPNITE best12. ;
+1264         format EQUIPAUX best12. ;
+1265         format ZEQUIPAUX best12. ;
+1266         format EQUIPAUXTYPE best12. ;
+1267         format ZEQUIPAUXTYPE best12. ;
+1268         format FUELAUX best12. ;
+1269         format ZFUELAUX best12. ;
+1270         format BASEHEAT best12. ;
+1271         format ZBASEHEAT best12. ;
+1272         format ATTCHEAT best12. ;
+1273         format ZATTCHEAT best12. ;
+1274         format GARGHEAT best12. ;
+1275         format ZGARGHEAT best12. ;
+1276         format MOISTURE best12. ;
+1277         format ZMOISTURE best12. ;
+1278         format USEMOISTURE best12. ;
+1279         format ZUSEMOISTURE best12. ;
+1280         format AIRCOND best12. ;
+1281         format ZAIRCOND best12. ;
+1282         format COOLTYPE best12. ;
+1283         format ZCOOLTYPE best12. ;
+1284         format CENACHP best12. ;
+1285         format ZCENACHP best12. ;
+1286         format AGECENAC best12. ;
+1287         format ZAGECENAC best12. ;
+1288         format THERMAINAC best12. ;
+1289         format ZTHERMAINAC best12. ;
+1290         format PROTHERMAC best12. ;
+1291         format ZPROTHERMAC best12. ;
+1292         format USECENAC best12. ;
+1293         format ZUSECENAC best12. ;
+1294         format NUMBERAC best12. ;
+1295         format ZNUMBERAC best12. ;
+1296         format WWACAGE best12. ;
+1297         format ZWWACAGE best12. ;
+1298         format USEWWAC best12. ;
+1299         format ZUSEWWAC best12. ;
+1300         format TEMPHOMEAC best12. ;
+1301         format ZTEMPHOMEAC best12. ;
+1302         format TEMPGONEAC best12. ;
+1303         format ZTEMPGONEAC best12. ;
+1304         format TEMPNITEAC best12. ;
+1305         format ZTEMPNITEAC best12. ;
+1306         format BASECOOL best12. ;
+1307         format ZBASECOOL best12. ;
+1308         format ATTCCOOL best12. ;
+1309         format ZATTCCOOL best12. ;
+1310         format GARGCOOL best12. ;
+1311         format ZGARGCOOL best12. ;
+1312         format SWAMPCOL best12. ;
+1313         format ZSWAMPCOL best12. ;
+1314         format NUMCFAN best12. ;
+1315         format ZNUMCFAN best12. ;
+1316         format NUMFLOORFAN best12. ;
+1317         format ZNUMFLOORFAN best12. ;
+1318         format NUMWHOLEFAN best12. ;
+1319         format ZNUMWHOLEFAN best12. ;
+1320         format NUMATTICFAN best12. ;
+1321         format ZNUMATTICFAN best12. ;
+1322         format NOTMOIST best12. ;
+1323         format ZNOTMOIST best12. ;
+1324         format USENOTMOIST best12. ;
+1325         format ZUSENOTMOIST best12. ;
+1326         format FUELH2O best12. ;
+1327         format ZFUELH2O best12. ;
+1328         format H2OHEATAPT best12. ;
+1329         format ZH2OHEATAPT best12. ;
+1330         format WHEATAGE best12. ;
+1331         format ZWHEATAGE best12. ;
+1332         format WHEATSIZ best12. ;
+1333         format ZWHEATSIZ best12. ;
+1334         format MORETHAN1H2O best12. ;
+1335         format ZMORETHAN1H2O best12. ;
+1336         format FUELH2O2 best12. ;
+1337         format ZFUELH2O2 best12. ;
+1338         format LGTINNUM best12. ;
+1339         format ZLGTINNUM best12. ;
+1340         format LGTIN4 best12. ;
+1341         format ZLGTIN4 best12. ;
+1342         format LGTINCAN best12. ;
+1343         format ZLGTINCAN best12. ;
+1344         format LGTINCFL best12. ;
+1345         format ZLGTINCFL best12. ;
+1346         format LGTINLED best12. ;
+1347         format ZLGTINLED best12. ;
+1348         format LGTINCNTL best12. ;
+1349         format ZLGTINCNTL best12. ;
+1350         format LGTOUTNUM best12. ;
+1351         format ZLGTOUTNUM best12. ;
+1352         format LGTOUTCNTL best12. ;
+1353         format ZLGTOUTCNTL best12. ;
+1354         format AUDIT best12. ;
+1355         format AUDITCHG best12. ;
+1356         format EELIGHTS best12. ;
+1357         format FREEAUDIT best12. ;
+1358         format REBATEAPP best12. ;
+1359         format RECYCAPP best12. ;
+1360         format TAXCREDITAPP best12. ;
+1361         format BENOTHER best12. ;
+1362         format ESCWASH best12. ;
+1363         format ESDISHW best12. ;
+1364         format ESDRYER best12. ;
+1365         format ESFREEZE best12. ;
+1366         format ESFRIG best12. ;
+1367         format ESLIGHT best12. ;
+1368         format ESWATER best12. ;
+1369         format ESWIN best12. ;
+1370         format SMARTTHERM best12. ;
+1371         format ELPAY best12. ;
+1372         format ZELPAY best12. ;
+1373         format NGPAY best12. ;
+1374         format ZNGPAY best12. ;
+1375         format LPGPAY best12. ;
+1376         format ZLPGPAY best12. ;
+1377         format FOPAY best12. ;
+1378         format ZFOPAY best12. ;
+1379         format SMARTMETER best12. ;
+1380         format INTDATA best12. ;
+1381         format INTDATAACC best12. ;
+1382         format HHSEX best12. ;
+1383         format ZHHSEX best12. ;
+1384         format HHAGE best12. ;
+1385         format ZHHAGE best12. ;
+1386         format EMPLOYHH best12. ;
+1387         format ZEMPLOYHH best12. ;
+1388         format SDESCENT best12. ;
+1389         format ZSDESCENT best12. ;
+1390         format HOUSEHOLDER_RACE best12. ;
+1391         format ZHOUSEHOLDER_RACE best12. ;
+1392         format EDUCATION best12. ;
+1393         format ZEDUCATION best12. ;
+1394         format NHSLDMEM best12. ;
+1395         format ZNHSLDMEM best12. ;
+1396         format NUMADULT best12. ;
+1397         format ZNUMADULT best12. ;
+1398         format NUMCHILD best12. ;
+1399         format ZNUMCHILD best12. ;
+1400         format ATHOME best12. ;
+1401         format ZATHOME best12. ;
+1402         format MONEYPY best12. ;
+1403         format ZMONEYPY best12. ;
+1404         format ENERGYASST best12. ;
+1405         format ZENERGYASST best12. ;
+1406         format ENERGYASST11 best12. ;
+1407         format ZENERGYASST11 best12. ;
+1408         format ENERGYASST12 best12. ;
+1409         format ZENERGYASST12 best12. ;
+1410         format ENERGYASST13 best12. ;
+1411         format ZENERGYASST13 best12. ;
+1412         format ENERGYASST14 best12. ;
+1413         format ZENERGYASST14 best12. ;
+1414         format ENERGYASST15 best12. ;
+1415         format ZENERGYASST15 best12. ;
+1416         format ENERGYASSTOTH best12. ;
+1417         format ZENERGYASSTOTH best12. ;
+1418         format SCALEB best12. ;
+1419         format ZSCALEB best12. ;
+1420         format SCALEG best12. ;
+1421         format ZSCALEG best12. ;
+1422         format SCALEE best12. ;
+1423         format ZSCALEE best12. ;
+1424         format PAYHELP best12. ;
+1425         format ZPAYHELP best12. ;
+1426         format NOHEATBROKE best12. ;
+1427         format ZNOHEATBROKE best12. ;
+1428         format NOHEATEL best12. ;
+1429         format ZNOHEATEL best12. ;
+1430         format NOHEATNG best12. ;
+1431         format ZNOHEATNG best12. ;
+1432         format NOHEATBULK best12. ;
+1433         format ZNOHEATBULK best12. ;
+1434         format NOHEATDAYS best12. ;
+1435         format ZNOHEATDAYS best12. ;
+1436         format NOHEATHELP best12. ;
+1437         format ZNOHEATHELP best12. ;
+1438         format COLDMA best12. ;
+1439         format ZCOLDMA best12. ;
+1440         format NOACBROKE best12. ;
+1441         format ZNOACBROKE best12. ;
+1442         format NOACEL best12. ;
+1443         format ZNOACEL best12. ;
+1444         format NOACDAYS best12. ;
+1445         format ZNOACDAYS best12. ;
+1446         format NOACHELP best12. ;
+1447         format ZNOACHELP best12. ;
+1448         format HOTMA best12. ;
+1449         format ZHOTMA best12. ;
+1450         format USEEL best12. ;
+1451         format ELWARM best12. ;
+1452         format ELCOOL best12. ;
+1453         format ELWATER best12. ;
+1454         format ELFOOD best12. ;
+1455         format ELOTHER best12. ;
+1456         format USENG best12. ;
+1457         format UGWARM best12. ;
+1458         format UGWATER best12. ;
+1459         format UGCOOK best12. ;
+1460         format UGOTH best12. ;
+1461         format USELP best12. ;
+1462         format LPWARM best12. ;
+1463         format LPWATER best12. ;
+1464         format LPCOOK best12. ;
+1465         format LPOTHER best12. ;
+1466         format USEFO best12. ;
+1467         format FOWARM best12. ;
+1468         format FOWATER best12. ;
+1469         format FOOTHER best12. ;
+1470         format USEWOOD best12. ;
+1471         format WOODLOGS best12. ;
+1472         format ZWOODLOGS best12. ;
+1473         format WDPELLET best12. ;
+1474         format ZWDPELLET best12. ;
+1475         format WDOTHER best12. ;
+1476         format WDWARM best12. ;
+1477         format WDWATER best12. ;
+1478         format USESOLAR best12. ;
+1479         format SOLWATER best12. ;
+1480         format SOLOTHER best12. ;
+1481         format TOTCSQFT best12. ;
+1482         format TOTHSQFT best12. ;
+1483         format TOTSQFT_EN best12. ;
+1484         format ZTOTSQFT_EN best12. ;
+1485         format TOTUCSQFT best12. ;
+1486         format TOTUSQFT best12. ;
+1487         format NWEIGHT best12. ;
+1488         format BRRWT1 best12. ;
+1489         format BRRWT2 best12. ;
+1490         format BRRWT3 best12. ;
+1491         format BRRWT4 best12. ;
+1492         format BRRWT5 best12. ;
+1493         format BRRWT6 best12. ;
+1494         format BRRWT7 best12. ;
+1495         format BRRWT8 best12. ;
+1496         format BRRWT9 best12. ;
+1497         format BRRWT10 best12. ;
+1498         format BRRWT11 best12. ;
+1499         format BRRWT12 best12. ;
+1500         format BRRWT13 best12. ;
+1501         format BRRWT14 best12. ;
+1502         format BRRWT15 best12. ;
+1503         format BRRWT16 best12. ;
+1504         format BRRWT17 best12. ;
+1505         format BRRWT18 best12. ;
+1506         format BRRWT19 best12. ;
+1507         format BRRWT20 best12. ;
+1508         format BRRWT21 best12. ;
+1509         format BRRWT22 best12. ;
+1510         format BRRWT23 best12. ;
+1511         format BRRWT24 best12. ;
+1512         format BRRWT25 best12. ;
+1513         format BRRWT26 best12. ;
+1514         format BRRWT27 best12. ;
+1515         format BRRWT28 best12. ;
+1516         format BRRWT29 best12. ;
+1517         format BRRWT30 best12. ;
+1518         format BRRWT31 best12. ;
+1519         format BRRWT32 best12. ;
+1520         format BRRWT33 best12. ;
+1521         format BRRWT34 best12. ;
+1522         format BRRWT35 best12. ;
+1523         format BRRWT36 best12. ;
+1524         format BRRWT37 best12. ;
+1525         format BRRWT38 best12. ;
+1526         format BRRWT39 best12. ;
+1527         format BRRWT40 best12. ;
+1528         format BRRWT41 best12. ;
+1529         format BRRWT42 best12. ;
+1530         format BRRWT43 best12. ;
+1531         format BRRWT44 best12. ;
+1532         format BRRWT45 best12. ;
+1533         format BRRWT46 best12. ;
+1534         format BRRWT47 best12. ;
+1535         format BRRWT48 best12. ;
+1536         format BRRWT49 best12. ;
+1537         format BRRWT50 best12. ;
+1538         format BRRWT51 best12. ;
+1539         format BRRWT52 best12. ;
+1540         format BRRWT53 best12. ;
+1541         format BRRWT54 best12. ;
+1542         format BRRWT55 best12. ;
+1543         format BRRWT56 best12. ;
+1544         format BRRWT57 best12. ;
+1545         format BRRWT58 best12. ;
+1546         format BRRWT59 best12. ;
+1547         format BRRWT60 best12. ;
+1548         format BRRWT61 best12. ;
+1549         format BRRWT62 best12. ;
+1550         format BRRWT63 best12. ;
+1551         format BRRWT64 best12. ;
+1552         format BRRWT65 best12. ;
+1553         format BRRWT66 best12. ;
+1554         format BRRWT67 best12. ;
+1555         format BRRWT68 best12. ;
+1556         format BRRWT69 best12. ;
+1557         format BRRWT70 best12. ;
+1558         format BRRWT71 best12. ;
+1559         format BRRWT72 best12. ;
+1560         format BRRWT73 best12. ;
+1561         format BRRWT74 best12. ;
+1562         format BRRWT75 best12. ;
+1563         format BRRWT76 best12. ;
+1564         format BRRWT77 best12. ;
+1565         format BRRWT78 best12. ;
+1566         format BRRWT79 best12. ;
+1567         format BRRWT80 best12. ;
+1568         format BRRWT81 best12. ;
+1569         format BRRWT82 best12. ;
+1570         format BRRWT83 best12. ;
+1571         format BRRWT84 best12. ;
+1572         format BRRWT85 best12. ;
+1573         format BRRWT86 best12. ;
+1574         format BRRWT87 best12. ;
+1575         format BRRWT88 best12. ;
+1576         format BRRWT89 best12. ;
+1577         format BRRWT90 best12. ;
+1578         format BRRWT91 best12. ;
+1579         format BRRWT92 best12. ;
+1580         format BRRWT93 best12. ;
+1581         format BRRWT94 best12. ;
+1582         format BRRWT95 best12. ;
+1583         format BRRWT96 best12. ;
+1584         format CDD30YR best12. ;
+1585         format CDD65 best12. ;
+1586         format CDD80 best12. ;
+1587         format CLIMATE_REGION_PUB $17. ;
+1588         format IECC_CLIMATE_PUB $5. ;
+1589         format HDD30YR best12. ;
+1590         format HDD65 best12. ;
+1591         format HDD50 best12. ;
+1592         format GNDHDD65 best12. ;
+1593         format WSF best12. ;
+1594         format OA_LAT best12. ;
+1595         format GWT best12. ;
+1596         format DBT1 best12. ;
+1597         format DBT99 best12. ;
+1598         format KWH best12. ;
+1599         format KWHSPH best12. ;
+1600         format KWHCOL best12. ;
+1601         format KWHWTH best12. ;
+1602         format KWHRFG best12. ;
+1603         format KWHRFG1 best12. ;
+1604         format KWHRFG2 best12. ;
+1605         format KWHFRZ best12. ;
+1606         format KWHCOK best12. ;
+1607         format KWHMICRO best12. ;
+1608         format KWHCW best12. ;
+1609         format KWHCDR best12. ;
+1610         format KWHDWH best12. ;
+1611         format KWHLGT best12. ;
+1612         format KWHTVREL best12. ;
+1613         format KWHTV1 best12. ;
+1614         format KWHTV2 best12. ;
+1615         format KWHAHUHEAT best12. ;
+1616         format KWHAHUCOL best12. ;
+1617         format KWHEVAPCOL best12. ;
+1618         format KWHCFAN best12. ;
+1619         format KWHDHUM best12. ;
+1620         format KWHHUM best12. ;
+1621         format KWHPLPMP best12. ;
+1622         format KWHHTBPMP best12. ;
+1623         format KWHHTBHEAT best12. ;
+1624         format KWHNEC best12. ;
+1625         format BTUEL best12. ;
+1626         format BTUELSPH best12. ;
+1627         format BTUELCOL best12. ;
+1628         format BTUELWTH best12. ;
+1629         format BTUELRFG best12. ;
+1630         format BTUELRFG1 best12. ;
+1631         format BTUELRFG2 best12. ;
+1632         format BTUELFRZ best12. ;
+1633         format BTUELCOK best12. ;
+1634         format BTUELMICRO best12. ;
+1635         format BTUELCW best12. ;
+1636         format BTUELCDR best12. ;
+1637         format BTUELDWH best12. ;
+1638         format BTUELLGT best12. ;
+1639         format BTUELTVREL best12. ;
+1640         format BTUELTV1 best12. ;
+1641         format BTUELTV2 best12. ;
+1642         format BTUELAHUHEAT best12. ;
+1643         format BTUELAHUCOL best12. ;
+1644         format BTUELEVAPCOL best12. ;
+1645         format BTUELCFAN best12. ;
+1646         format BTUELDHUM best12. ;
+1647         format BTUELHUM best12. ;
+1648         format BTUELPLPMP best12. ;
+1649         format BTUELHTBPMP best12. ;
+1650         format BTUELHTBHEAT best12. ;
+1651         format BTUELNEC best12. ;
+1652         format DOLLAREL best12. ;
+1653         format DOLELSPH best12. ;
+1654         format DOLELCOL best12. ;
+1655         format DOLELWTH best12. ;
+1656         format DOLELRFG best12. ;
+1657         format DOLELRFG1 best12. ;
+1658         format DOLELRFG2 best12. ;
+1659         format DOLELFRZ best12. ;
+1660         format DOLELCOK best12. ;
+1661         format DOLELMICRO best12. ;
+1662         format DOLELCW best12. ;
+1663         format DOLELCDR best12. ;
+1664         format DOLELDWH best12. ;
+1665         format DOLELLGT best12. ;
+1666         format DOLELTVREL best12. ;
+1667         format DOLELTV1 best12. ;
+1668         format DOLELTV2 best12. ;
+1669         format DOLELAHUHEAT best12. ;
+1670         format DOLELAHUCOL best12. ;
+1671         format DOLELEVAPCOL best12. ;
+1672         format DOLELCFAN best12. ;
+1673         format DOLELDHUM best12. ;
+1674         format DOLELHUM best12. ;
+1675         format DOLELPLPMP best12. ;
+1676         format DOLELHTBPMP best12. ;
+1677         format DOLELHTBHEAT best12. ;
+1678         format DOLELNEC best12. ;
+1679         format CUFEETNG best12. ;
+1680         format CUFEETNGSPH best12. ;
+1681         format CUFEETNGWTH best12. ;
+1682         format CUFEETNGCOK best12. ;
+1683         format CUFEETNGCDR best12. ;
+1684         format CUFEETNGPLHEAT best12. ;
+1685         format CUFEETNGHTBHEAT best12. ;
+1686         format CUFEETNGNEC best12. ;
+1687         format BTUNG best12. ;
+1688         format BTUNGSPH best12. ;
+1689         format BTUNGWTH best12. ;
+1690         format BTUNGCOK best12. ;
+1691         format BTUNGCDR best12. ;
+1692         format BTUNGPLHEAT best12. ;
+1693         format BTUNGHTBHEAT best12. ;
+1694         format BTUNGNEC best12. ;
+1695         format DOLLARNG best12. ;
+1696         format DOLNGSPH best12. ;
+1697         format DOLNGWTH best12. ;
+1698         format DOLNGCOK best12. ;
+1699         format DOLNGCDR best12. ;
+1700         format DOLNGPLHEAT best12. ;
+1701         format DOLNGHTBHEAT best12. ;
+1702         format DOLNGNEC best12. ;
+1703         format GALLONLP best12. ;
+1704         format GALLONLPSPH best12. ;
+1705         format GALLONLPWTH best12. ;
+1706         format GALLONLPCOK best12. ;
+1707         format GALLONLPCDR best12. ;
+1708         format GALLONLPNEC best12. ;
+1709         format BTULP best12. ;
+1710         format BTULPSPH best12. ;
+1711         format BTULPWTH best12. ;
+1712         format BTULPCOK best12. ;
+1713         format BTULPCDR best12. ;
+1714         format BTULPNEC best12. ;
+1715         format DOLLARLP best12. ;
+1716         format DOLLPSPH best12. ;
+1717         format DOLLPWTH best12. ;
+1718         format DOLLPCOK best12. ;
+1719         format DOLLPCDR best12. ;
+1720         format DOLLPNEC best12. ;
+1721         format GALLONFO best12. ;
+1722         format GALLONFOSPH best12. ;
+1723         format GALLONFOWTH best12. ;
+1724         format GALLONFONEC best12. ;
+1725         format BTUFO best12. ;
+1726         format BTUFOSPH best12. ;
+1727         format BTUFOWTH best12. ;
+1728         format BTUFONEC best12. ;
+1729         format DOLLARFO best12. ;
+1730         format DOLFOSPH best12. ;
+1731         format DOLFOWTH best12. ;
+1732         format DOLFONEC best12. ;
+1733         format TOTALBTU best12. ;
+1734         format TOTALDOL best12. ;
+1735         format TOTALBTUSPH best12. ;
+1736         format TOTALDOLSPH best12. ;
+1737         format TOTALBTUWTH best12. ;
+1738         format TOTALDOLWTH best12. ;
+1739         format TOTALBTUCOK best12. ;
+1740         format TOTALDOLCOK best12. ;
+1741         format TOTALBTUCDR best12. ;
+1742         format TOTALDOLCDR best12. ;
+1743         format TOTALBTUPL best12. ;
+1744         format TOTALDOLPL best12. ;
+1745         format TOTALBTUHTB best12. ;
+1746         format TOTALDOLHTB best12. ;
+1747         format TOTALBTUNEC best12. ;
+1748         format TOTALDOLNEC best12. ;
+1749         format WOODAMT best12. ;
+1750         format ZWOODAMT best12. ;
+1751         format WOODBTU best12. ;
+1752         format PELLETAMT best12. ;
+1753         format ZPELLETAMT best12. ;
+1754         format PELLETBTU best12. ;
+1755         format ELXBTU best12. ;
+1756         format PERIODEL best12. ;
+1757         format ZELAMOUNT best12. ;
+1758         format NGXBTU best12. ;
+1759         format PERIODNG best12. ;
+1760         format ZNGAMOUNT best12. ;
+1761         format FOXBTU best12. ;
+1762         format PERIODFO best12. ;
+1763         format ZFOAMOUNT best12. ;
+1764         format LPXBTU best12. ;
+1765         format PERIODLP best12. ;
+1766         format ZLPAMOUNT best12. ;
+1767      input
+1768                  DOEID
+1769                  REGIONC
+1770                  DIVISION
+1771                  METROMICRO  $
+1772                  UATYP10  $
+1773                  TYPEHUQ
+1774                  ZTYPEHUQ
+1775                  CELLAR
+1776                  ZCELLAR
+1777                  BASEFIN
+1778                  ZBASEFIN
+1779                  ATTIC
+1780                  ZATTIC
+1781                  ATTICFIN
+1782                  ZATTICFIN
+1783                  STORIES
+1784                  ZSTORIES
+1785                  PRKGPLC1
+1786                  ZPRKGPLC1
+1787                  SIZEOFGARAGE
+1788                  ZSIZEOFGARAGE
+1789                  KOWNRENT
+1790                  ZKOWNRENT
+1791                  YEARMADERANGE
+1792                  ZYEARMADERANGE
+1793                  OCCUPYYRANGE
+1794                  ZOCCUPYYRANGE
+1795                  STUDIO
+1796                  ZSTUDIO
+1797                  BEDROOMS
+1798                  ZBEDROOMS
+1799                  NCOMBATH
+1800                  ZNCOMBATH
+1801                  NHAFBATH
+1802                  ZNHAFBATH
+1803                  OTHROOMS
+1804                  ZOTHROOMS
+1805                  TOTROOMS
+1806                  ZTOTROOMS
+1807                  WALLTYPE
+1808                  ZWALLTYPE
+1809                  ROOFTYPE
+1810                  ZROOFTYPE
+1811                  HIGHCEIL
+1812                  ZHIGHCEIL
+1813                  DOOR1SUM
+1814                  ZDOOR1SUM
+1815                  WINDOWS
+1816                  ZWINDOWS
+1817                  TYPEGLASS
+1818                  ZTYPEGLASS
+1819                  WINFRAME
+1820                  ZWINFRAME
+1821                  ADQINSUL
+1822                  ZADQINSUL
+1823                  DRAFTY
+1824                  ZDRAFTY
+1825                  UGASHERE
+1826                  ZUGASHERE
+1827                  SWIMPOOL
+1828                  ZSWIMPOOL
+1829                  MONPOOL
+1830                  ZMONPOOL
+1831                  POOL
+1832                  ZPOOL
+1833                  FUELPOOL
+1834                  ZFUELPOOL
+1835                  RECBATH
+1836                  ZRECBATH
+1837                  MONTUB
+1838                  ZMONTUB
+1839                  FUELTUB
+1840                  ZFUELTUB
+1841                  OUTLET
+1842                  ZOUTLET
+1843                  ALTFUELPEV
+1844                  ZALTFUELPEV
+1845                  BACKUP
+1846                  ZBACKUP
+1847                  SOLAR
+1848                  NUMFRIG
+1849                  ZNUMFRIG
+1850                  SIZRFRI1
+1851                  ZSIZRFRI1
+1852                  TYPERFR1
+1853                  ZTYPERFR1
+1854                  AGERFRI1
+1855                  ZAGERFRI1
+1856                  ICE
+1857                  ZICE
+1858                  SIZRFRI2
+1859                  ZSIZRFRI2
+1860                  TYPERFR2
+1861                  ZTYPERFR2
+1862                  AGERFRI2
+1863                  ZAGERFRI2
+1864                  LOCRFRI2
+1865                  ZLOCRFRI2
+1866                  NUMFREEZ
+1867                  ZNUMFREEZ
+1868                  UPRTFRZR
+1869                  ZUPRTFRZR
+1870                  SIZFREEZ
+1871                  ZSIZFREEZ
+1872                  AGEFRZR
+1873                  ZAGEFRZR
+1874                  STOVEN
+1875                  ZSTOVEN
+1876                  STOVENFUEL
+1877                  ZSTOVENFUEL
+1878                  DUALCOOKTFUEL
+1879                  ZDUALCOOKTFUEL
+1880                  DUALOVENFUEL
+1881                  ZDUALOVENFUEL
+1882                  COOKTUSE
+1883                  ZCOOKTUSE
+1884                  OVENUSE
+1885                  ZOVENUSE
+1886                  STOVE
+1887                  ZSTOVE
+1888                  STOVEFUEL
+1889                  ZSTOVEFUEL
+1890                  SEPCOOKTUSE
+1891                  ZSEPCOOKTUSE
+1892                  OVEN
+1893                  ZOVEN
+1894                  OVENFUEL
+1895                  ZOVENFUEL
+1896                  SEPOVENUSE
+1897                  ZSEPOVENUSE
+1898                  MICRO
+1899                  ZMICRO
+1900                  AMTMICRO
+1901                  ZAMTMICRO
+1902                  OUTGRILL
+1903                  ZOUTGRILL
+1904                  OUTGRILLFUEL
+1905                  ZOUTGRILLFUEL
+1906                  NUMMEAL
+1907                  ZNUMMEAL
+1908                  TOAST
+1909                  ZTOAST
+1910                  TOASTOVN
+1911                  ZTOASTOVN
+1912                  COFFEE
+1913                  ZCOFFEE
+1914                  CROCKPOT
+1915                  ZCROCKPOT
+1916                  FOODPROC
+1917                  ZFOODPROC
+1918                  RICECOOK
+1919                  ZRICECOOK
+1920                  BLENDER
+1921                  ZBLENDER
+1922                  APPOTHER
+1923                  ZAPPOTHER
+1924                  DISHWASH
+1925                  ZDISHWASH
+1926                  DWASHUSE
+1927                  ZDWASHUSE
+1928                  DWCYCLE
+1929                  ZDWCYCLE
+1930                  AGEDW
+1931                  ZAGEDW
+1932                  CWASHER
+1933                  ZCWASHER
+1934                  TOPFRONT
+1935                  ZTOPFRONT
+1936                  WASHLOAD
+1937                  ZWASHLOAD
+1938                  WASHTEMP
+1939                  ZWASHTEMP
+1940                  RNSETEMP
+1941                  ZRNSETEMP
+1942                  AGECWASH
+1943                  ZAGECWASH
+1944                  DRYER
+1945                  ZDRYER
+1946                  DRYRFUEL
+1947                  ZDRYRFUEL
+1948                  DRYRUSE
+1949                  ZDRYRUSE
+1950                  AGECDRYER
+1951                  ZAGECDRYER
+1952                  TVCOLOR
+1953                  ZTVCOLOR
+1954                  TVSIZE1
+1955                  ZTVSIZE1
+1956                  TVTYPE1
+1957                  ZTVTYPE1
+1958                  TVONWD1
+1959                  ZTVONWD1
+1960                  TVONWE1
+1961                  ZTVONWE1
+1962                  TVSIZE2
+1963                  ZTVSIZE2
+1964                  TVTYPE2
+1965                  ZTVTYPE2
+1966                  TVONWD2
+1967                  ZTVONWD2
+1968                  TVONWE2
+1969                  ZTVONWE2
+1970                  CABLESAT
+1971                  ZCABLESAT
+1972                  COMBODVR
+1973                  ZCOMBODVR
+1974                  SEPDVR
+1975                  ZSEPDVR
+1976                  PLAYSTA
+1977                  ZPLAYSTA
+1978                  DVD
+1979                  ZDVD
+1980                  VCR
+1981                  ZVCR
+1982                  INTSTREAM
+1983                  ZINTSTREAM
+1984                  TVAUDIOSYS
+1985                  ZTVAUDIOSYS
+1986                  DESKTOP
+1987                  ZDESKTOP
+1988                  NUMLAPTOP
+1989                  ZNUMLAPTOP
+1990                  NUMTABLET
+1991                  ZNUMTABLET
+1992                  ELPERIPH
+1993                  ZELPERIPH
+1994                  NUMSMPHONE
+1995                  ZNUMSMPHONE
+1996                  CELLPHONE
+1997                  ZCELLPHONE
+1998                  INTERNET
+1999                  ZINTERNET
+2000                  INWIRELESS
+2001                  ZINWIRELESS
+2002                  HEATHOME
+2003                  ZHEATHOME
+2004                  DNTHEAT
+2005                  ZDNTHEAT
+2006                  EQUIPM
+2007                  ZEQUIPM
+2008                  FUELHEAT
+2009                  ZFUELHEAT
+2010                  EQUIPAGE
+2011                  ZEQUIPAGE
+2012                  THERMAIN
+2013                  ZTHERMAIN
+2014                  PROTHERM
+2015                  ZPROTHERM
+2016                  EQUIPMUSE
+2017                  ZEQUIPMUSE
+2018                  TEMPHOME
+2019                  ZTEMPHOME
+2020                  TEMPGONE
+2021                  ZTEMPGONE
+2022                  TEMPNITE
+2023                  ZTEMPNITE
+2024                  EQUIPAUX
+2025                  ZEQUIPAUX
+2026                  EQUIPAUXTYPE
+2027                  ZEQUIPAUXTYPE
+2028                  FUELAUX
+2029                  ZFUELAUX
+2030                  BASEHEAT
+2031                  ZBASEHEAT
+2032                  ATTCHEAT
+2033                  ZATTCHEAT
+2034                  GARGHEAT
+2035                  ZGARGHEAT
+2036                  MOISTURE
+2037                  ZMOISTURE
+2038                  USEMOISTURE
+2039                  ZUSEMOISTURE
+2040                  AIRCOND
+2041                  ZAIRCOND
+2042                  COOLTYPE
+2043                  ZCOOLTYPE
+2044                  CENACHP
+2045                  ZCENACHP
+2046                  AGECENAC
+2047                  ZAGECENAC
+2048                  THERMAINAC
+2049                  ZTHERMAINAC
+2050                  PROTHERMAC
+2051                  ZPROTHERMAC
+2052                  USECENAC
+2053                  ZUSECENAC
+2054                  NUMBERAC
+2055                  ZNUMBERAC
+2056                  WWACAGE
+2057                  ZWWACAGE
+2058                  USEWWAC
+2059                  ZUSEWWAC
+2060                  TEMPHOMEAC
+2061                  ZTEMPHOMEAC
+2062                  TEMPGONEAC
+2063                  ZTEMPGONEAC
+2064                  TEMPNITEAC
+2065                  ZTEMPNITEAC
+2066                  BASECOOL
+2067                  ZBASECOOL
+2068                  ATTCCOOL
+2069                  ZATTCCOOL
+2070                  GARGCOOL
+2071                  ZGARGCOOL
+2072                  SWAMPCOL
+2073                  ZSWAMPCOL
+2074                  NUMCFAN
+2075                  ZNUMCFAN
+2076                  NUMFLOORFAN
+2077                  ZNUMFLOORFAN
+2078                  NUMWHOLEFAN
+2079                  ZNUMWHOLEFAN
+2080                  NUMATTICFAN
+2081                  ZNUMATTICFAN
+2082                  NOTMOIST
+2083                  ZNOTMOIST
+2084                  USENOTMOIST
+2085                  ZUSENOTMOIST
+2086                  FUELH2O
+2087                  ZFUELH2O
+2088                  H2OHEATAPT
+2089                  ZH2OHEATAPT
+2090                  WHEATAGE
+2091                  ZWHEATAGE
+2092                  WHEATSIZ
+2093                  ZWHEATSIZ
+2094                  MORETHAN1H2O
+2095                  ZMORETHAN1H2O
+2096                  FUELH2O2
+2097                  ZFUELH2O2
+2098                  LGTINNUM
+2099                  ZLGTINNUM
+2100                  LGTIN4
+2101                  ZLGTIN4
+2102                  LGTINCAN
+2103                  ZLGTINCAN
+2104                  LGTINCFL
+2105                  ZLGTINCFL
+2106                  LGTINLED
+2107                  ZLGTINLED
+2108                  LGTINCNTL
+2109                  ZLGTINCNTL
+2110                  LGTOUTNUM
+2111                  ZLGTOUTNUM
+2112                  LGTOUTCNTL
+2113                  ZLGTOUTCNTL
+2114                  AUDIT
+2115                  AUDITCHG
+2116                  EELIGHTS
+2117                  FREEAUDIT
+2118                  REBATEAPP
+2119                  RECYCAPP
+2120                  TAXCREDITAPP
+2121                  BENOTHER
+2122                  ESCWASH
+2123                  ESDISHW
+2124                  ESDRYER
+2125                  ESFREEZE
+2126                  ESFRIG
+2127                  ESLIGHT
+2128                  ESWATER
+2129                  ESWIN
+2130                  SMARTTHERM
+2131                  ELPAY
+2132                  ZELPAY
+2133                  NGPAY
+2134                  ZNGPAY
+2135                  LPGPAY
+2136                  ZLPGPAY
+2137                  FOPAY
+2138                  ZFOPAY
+2139                  SMARTMETER
+2140                  INTDATA
+2141                  INTDATAACC
+2142                  HHSEX
+2143                  ZHHSEX
+2144                  HHAGE
+2145                  ZHHAGE
+2146                  EMPLOYHH
+2147                  ZEMPLOYHH
+2148                  SDESCENT
+2149                  ZSDESCENT
+2150                  HOUSEHOLDER_RACE
+2151                  ZHOUSEHOLDER_RACE
+2152                  EDUCATION
+2153                  ZEDUCATION
+2154                  NHSLDMEM
+2155                  ZNHSLDMEM
+2156                  NUMADULT
+2157                  ZNUMADULT
+2158                  NUMCHILD
+2159                  ZNUMCHILD
+2160                  ATHOME
+2161                  ZATHOME
+2162                  MONEYPY
+2163                  ZMONEYPY
+2164                  ENERGYASST
+2165                  ZENERGYASST
+2166                  ENERGYASST11
+2167                  ZENERGYASST11
+2168                  ENERGYASST12
+2169                  ZENERGYASST12
+2170                  ENERGYASST13
+2171                  ZENERGYASST13
+2172                  ENERGYASST14
+2173                  ZENERGYASST14
+2174                  ENERGYASST15
+2175                  ZENERGYASST15
+2176                  ENERGYASSTOTH
+2177                  ZENERGYASSTOTH
+2178                  SCALEB
+2179                  ZSCALEB
+2180                  SCALEG
+2181                  ZSCALEG
+2182                  SCALEE
+2183                  ZSCALEE
+2184                  PAYHELP
+2185                  ZPAYHELP
+2186                  NOHEATBROKE
+2187                  ZNOHEATBROKE
+2188                  NOHEATEL
+2189                  ZNOHEATEL
+2190                  NOHEATNG
+2191                  ZNOHEATNG
+2192                  NOHEATBULK
+2193                  ZNOHEATBULK
+2194                  NOHEATDAYS
+2195                  ZNOHEATDAYS
+2196                  NOHEATHELP
+2197                  ZNOHEATHELP
+2198                  COLDMA
+2199                  ZCOLDMA
+2200                  NOACBROKE
+2201                  ZNOACBROKE
+2202                  NOACEL
+2203                  ZNOACEL
+2204                  NOACDAYS
+2205                  ZNOACDAYS
+2206                  NOACHELP
+2207                  ZNOACHELP
+2208                  HOTMA
+2209                  ZHOTMA
+2210                  USEEL
+2211                  ELWARM
+2212                  ELCOOL
+2213                  ELWATER
+2214                  ELFOOD
+2215                  ELOTHER
+2216                  USENG
+2217                  UGWARM
+2218                  UGWATER
+2219                  UGCOOK
+2220                  UGOTH
+2221                  USELP
+2222                  LPWARM
+2223                  LPWATER
+2224                  LPCOOK
+2225                  LPOTHER
+2226                  USEFO
+2227                  FOWARM
+2228                  FOWATER
+2229                  FOOTHER
+2230                  USEWOOD
+2231                  WOODLOGS
+2232                  ZWOODLOGS
+2233                  WDPELLET
+2234                  ZWDPELLET
+2235                  WDOTHER
+2236                  WDWARM
+2237                  WDWATER
+2238                  USESOLAR
+2239                  SOLWATER
+2240                  SOLOTHER
+2241                  TOTCSQFT
+2242                  TOTHSQFT
+2243                  TOTSQFT_EN
+2244                  ZTOTSQFT_EN
+2245                  TOTUCSQFT
+2246                  TOTUSQFT
+2247                  NWEIGHT
+2248                  BRRWT1
+2249                  BRRWT2
+2250                  BRRWT3
+2251                  BRRWT4
+2252                  BRRWT5
+2253                  BRRWT6
+2254                  BRRWT7
+2255                  BRRWT8
+2256                  BRRWT9
+2257                  BRRWT10
+2258                  BRRWT11
+2259                  BRRWT12
+2260                  BRRWT13
+2261                  BRRWT14
+2262                  BRRWT15
+2263                  BRRWT16
+2264                  BRRWT17
+2265                  BRRWT18
+2266                  BRRWT19
+2267                  BRRWT20
+2268                  BRRWT21
+2269                  BRRWT22
+2270                  BRRWT23
+2271                  BRRWT24
+2272                  BRRWT25
+2273                  BRRWT26
+2274                  BRRWT27
+2275                  BRRWT28
+2276                  BRRWT29
+2277                  BRRWT30
+2278                  BRRWT31
+2279                  BRRWT32
+2280                  BRRWT33
+2281                  BRRWT34
+2282                  BRRWT35
+2283                  BRRWT36
+2284                  BRRWT37
+2285                  BRRWT38
+2286                  BRRWT39
+2287                  BRRWT40
+2288                  BRRWT41
+2289                  BRRWT42
+2290                  BRRWT43
+2291                  BRRWT44
+2292                  BRRWT45
+2293                  BRRWT46
+2294                  BRRWT47
+2295                  BRRWT48
+2296                  BRRWT49
+2297                  BRRWT50
+2298                  BRRWT51
+2299                  BRRWT52
+2300                  BRRWT53
+2301                  BRRWT54
+2302                  BRRWT55
+2303                  BRRWT56
+2304                  BRRWT57
+2305                  BRRWT58
+2306                  BRRWT59
+2307                  BRRWT60
+2308                  BRRWT61
+2309                  BRRWT62
+2310                  BRRWT63
+2311                  BRRWT64
+2312                  BRRWT65
+2313                  BRRWT66
+2314                  BRRWT67
+2315                  BRRWT68
+2316                  BRRWT69
+2317                  BRRWT70
+2318                  BRRWT71
+2319                  BRRWT72
+2320                  BRRWT73
+2321                  BRRWT74
+2322                  BRRWT75
+2323                  BRRWT76
+2324                  BRRWT77
+2325                  BRRWT78
+2326                  BRRWT79
+2327                  BRRWT80
+2328                  BRRWT81
+2329                  BRRWT82
+2330                  BRRWT83
+2331                  BRRWT84
+2332                  BRRWT85
+2333                  BRRWT86
+2334                  BRRWT87
+2335                  BRRWT88
+2336                  BRRWT89
+2337                  BRRWT90
+2338                  BRRWT91
+2339                  BRRWT92
+2340                  BRRWT93
+2341                  BRRWT94
+2342                  BRRWT95
+2343                  BRRWT96
+2344                  CDD30YR
+2345                  CDD65
+2346                  CDD80
+2347                  CLIMATE_REGION_PUB  $
+2348                  IECC_CLIMATE_PUB  $
+2349                  HDD30YR
+2350                  HDD65
+2351                  HDD50
+2352                  GNDHDD65
+2353                  WSF
+2354                  OA_LAT
+2355                  GWT
+2356                  DBT1
+2357                  DBT99
+2358                  KWH
+2359                  KWHSPH
+2360                  KWHCOL
+2361                  KWHWTH
+2362                  KWHRFG
+2363                  KWHRFG1
+2364                  KWHRFG2
+2365                  KWHFRZ
+2366                  KWHCOK
+2367                  KWHMICRO
+2368                  KWHCW
+2369                  KWHCDR
+2370                  KWHDWH
+2371                  KWHLGT
+2372                  KWHTVREL
+2373                  KWHTV1
+2374                  KWHTV2
+2375                  KWHAHUHEAT
+2376                  KWHAHUCOL
+2377                  KWHEVAPCOL
+2378                  KWHCFAN
+2379                  KWHDHUM
+2380                  KWHHUM
+2381                  KWHPLPMP
+2382                  KWHHTBPMP
+2383                  KWHHTBHEAT
+2384                  KWHNEC
+2385                  BTUEL
+2386                  BTUELSPH
+2387                  BTUELCOL
+2388                  BTUELWTH
+2389                  BTUELRFG
+2390                  BTUELRFG1
+2391                  BTUELRFG2
+2392                  BTUELFRZ
+2393                  BTUELCOK
+2394                  BTUELMICRO
+2395                  BTUELCW
+2396                  BTUELCDR
+2397                  BTUELDWH
+2398                  BTUELLGT
+2399                  BTUELTVREL
+2400                  BTUELTV1
+2401                  BTUELTV2
+2402                  BTUELAHUHEAT
+2403                  BTUELAHUCOL
+2404                  BTUELEVAPCOL
+2405                  BTUELCFAN
+2406                  BTUELDHUM
+2407                  BTUELHUM
+2408                  BTUELPLPMP
+2409                  BTUELHTBPMP
+2410                  BTUELHTBHEAT
+2411                  BTUELNEC
+2412                  DOLLAREL
+2413                  DOLELSPH
+2414                  DOLELCOL
+2415                  DOLELWTH
+2416                  DOLELRFG
+2417                  DOLELRFG1
+2418                  DOLELRFG2
+2419                  DOLELFRZ
+2420                  DOLELCOK
+2421                  DOLELMICRO
+2422                  DOLELCW
+2423                  DOLELCDR
+2424                  DOLELDWH
+2425                  DOLELLGT
+2426                  DOLELTVREL
+2427                  DOLELTV1
+2428                  DOLELTV2
+2429                  DOLELAHUHEAT
+2430                  DOLELAHUCOL
+2431                  DOLELEVAPCOL
+2432                  DOLELCFAN
+2433                  DOLELDHUM
+2434                  DOLELHUM
+2435                  DOLELPLPMP
+2436                  DOLELHTBPMP
+2437                  DOLELHTBHEAT
+2438                  DOLELNEC
+2439                  CUFEETNG
+2440                  CUFEETNGSPH
+2441                  CUFEETNGWTH
+2442                  CUFEETNGCOK
+2443                  CUFEETNGCDR
+2444                  CUFEETNGPLHEAT
+2445                  CUFEETNGHTBHEAT
+2446                  CUFEETNGNEC
+2447                  BTUNG
+2448                  BTUNGSPH
+2449                  BTUNGWTH
+2450                  BTUNGCOK
+2451                  BTUNGCDR
+2452                  BTUNGPLHEAT
+2453                  BTUNGHTBHEAT
+2454                  BTUNGNEC
+2455                  DOLLARNG
+2456                  DOLNGSPH
+2457                  DOLNGWTH
+2458                  DOLNGCOK
+2459                  DOLNGCDR
+2460                  DOLNGPLHEAT
+2461                  DOLNGHTBHEAT
+2462                  DOLNGNEC
+2463                  GALLONLP
+2464                  GALLONLPSPH
+2465                  GALLONLPWTH
+2466                  GALLONLPCOK
+2467                  GALLONLPCDR
+2468                  GALLONLPNEC
+2469                  BTULP
+2470                  BTULPSPH
+2471                  BTULPWTH
+2472                  BTULPCOK
+2473                  BTULPCDR
+2474                  BTULPNEC
+2475                  DOLLARLP
+2476                  DOLLPSPH
+2477                  DOLLPWTH
+2478                  DOLLPCOK
+2479                  DOLLPCDR
+2480                  DOLLPNEC
+2481                  GALLONFO
+2482                  GALLONFOSPH
+2483                  GALLONFOWTH
+2484                  GALLONFONEC
+2485                  BTUFO
+2486                  BTUFOSPH
+2487                  BTUFOWTH
+2488                  BTUFONEC
+2489                  DOLLARFO
+2490                  DOLFOSPH
+2491                  DOLFOWTH
+2492                  DOLFONEC
+2493                  TOTALBTU
+2494                  TOTALDOL
+2495                  TOTALBTUSPH
+2496                  TOTALDOLSPH
+2497                  TOTALBTUWTH
+2498                  TOTALDOLWTH
+2499                  TOTALBTUCOK
+2500                  TOTALDOLCOK
+2501                  TOTALBTUCDR
+2502                  TOTALDOLCDR
+2503                  TOTALBTUPL
+2504                  TOTALDOLPL
+2505                  TOTALBTUHTB
+2506                  TOTALDOLHTB
+2507                  TOTALBTUNEC
+2508                  TOTALDOLNEC
+2509                  WOODAMT
+2510                  ZWOODAMT
+2511                  WOODBTU
+2512                  PELLETAMT
+2513                  ZPELLETAMT
+2514                  PELLETBTU
+2515                  ELXBTU
+2516                  PERIODEL
+2517                  ZELAMOUNT
+2518                  NGXBTU
+2519                  PERIODNG
+2520                  ZNGAMOUNT
+2521                  FOXBTU
+2522                  PERIODFO
+2523                  ZFOAMOUNT
+2524                  LPXBTU
+2525                  PERIODLP
+2526                  ZLPAMOUNT
+2527      ;
+2528      if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection macro variable */
+2529      run;
+
+NOTE: The infile 'C:/Users/lwenjing/Downloads//recs2015_public_v4.csv' is:
+      Filename=C:\Users\lwenjing\Downloads\\recs2015_public_v4.csv,
+      RECFM=V,LRECL=32767,File Size (bytes)=19372309,
+      Last Modified=10Dec2019:15:55:08,
+      Create Time=10Dec2019:15:55:02
+
+NOTE: 5686 records were read from the infile
+      'C:/Users/lwenjing/Downloads//recs2015_public_v4.csv'.
+      The minimum record length was 3317.
+      The maximum record length was 3477.
+NOTE: The data set BRR_LONG.PS6_Q2_RESULT has 5686 observations and 759 variables.
+NOTE: DATA statement used (Total process time):
+      real time           4.57 seconds
+      cpu time            2.54 seconds
+
+
+5686 rows created in BRR_LONG.PS6_Q2_RESULT from
+C:/Users/lwenjing/Downloads//recs2015_public_v4.csv.
+
+
+
+NOTE: BRR_LONG.PS6_Q2_RESULT data set was successfully created.
+NOTE: The data set BRR_LONG.PS6_Q2_RESULT has 5686 observations and 759 variables.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           8.70 seconds
+      cpu time            6.56 seconds
+
+
+2530
+2531  /** data processing **/
+2532  data work.ps6_q2_result;
+2533   set brr_long.ps6_q2_result;
+2534   if TEMPNITE = -2 then delete;
+2535   if HEATHOME = 1;
+2536   keep BRRWT1-BRRWT96 TEMPNITE NWEIGHT
+2537  run;
+2538
+
+WARNING: The variable run in the DROP, KEEP, or RENAME list has never been referenced.
+NOTE: There were 5686 observations read from the data set BRR_LONG.PS6_Q2_RESULT.
+NOTE: The data set WORK.PS6_Q2_RESULT has 5428 observations and 98 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.04 seconds
+
+
+2539  proc sort data=ps6_q2_result;
+2540  by TEMPNITE NWEIGHT;
+2541  run;
+
+NOTE: There were 5428 observations read from the data set WORK.PS6_Q2_RESULT.
+NOTE: The data set WORK.PS6_Q2_RESULT has 5428 observations and 98 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.01 seconds
+
+
+2542
+2543  /** data from wide to long **/
+2544  proc transpose data=ps6_q2_result out=brr_long.sas7bdat prefix=BRRWT ;
+2545     by TEMPNITE NWEIGHT;
+2546  var BRRWT1-BRRWT96;
+2547  run;
+
+NOTE: There were 5428 observations read from the data set WORK.PS6_Q2_RESULT.
+NOTE: The data set BRR_LONG.SAS7BDAT has 515904 observations and 6 variables.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.09 seconds
+
+
+2548
+2549  data brr_long.sas7bdat;
+2550    set brr_long.sas7bdat (rename=(BRRWT1=BRRWT));
+2551    count=input(substr(_name_, 6), 2.);
+2552    drop _name_ BRRWT2 BRRWT3;
+2553  run;
+
+NOTE: There were 515904 observations read from the data set BRR_LONG.SAS7BDAT.
+NOTE: The data set BRR_LONG.SAS7BDAT has 515904 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.12 seconds
+      cpu time            0.11 seconds
+
+
+2554
+2555  /** compute estimate and se **/
+2556  proc sort data=brr_long.sas7bdat;
+2557  by count;
+2558  run;
+
+NOTE: There were 515904 observations read from the data set BRR_LONG.SAS7BDAT.
+NOTE: The data set BRR_LONG.SAS7BDAT has 515904 observations and 4 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.35 seconds
+      cpu time            0.32 seconds
+
+
+2559
+2560  proc summary data=brr_long.sas7bdat;
+2561   by count;
+2562   output out=total
+2563   sum(BRRWT)=total_brr
+2564   sum(NWEIGHT)=total_n;
+2565  run;
+
+NOTE: There were 515904 observations read from the data set BRR_LONG.SAS7BDAT.
+NOTE: The data set WORK.TOTAL has 96 observations and 5 variables.
+NOTE: PROCEDURE SUMMARY used (Total process time):
+      real time           0.28 seconds
+      cpu time            0.15 seconds
+
+
+2566
+2567  data totals_data;
+2568   merge total brr_long.sas7bdat;
+2569   by count;
+2570  run;
+
+NOTE: There were 96 observations read from the data set WORK.TOTAL.
+NOTE: There were 515904 observations read from the data set BRR_LONG.SAS7BDAT.
+NOTE: The data set WORK.TOTALS_DATA has 515904 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.13 seconds
+      cpu time            0.14 seconds
+
+
+2571
+2572  data estimate_data;
+2573   set totals_data;
+2574   means_rep = TEMPNITE*BRRWT/total_brr;
+2575   means_tot = TEMPNITE*NWEIGHT/total_n;
+2576   diff = (means_rep-means_tot)**2;
+2577  run;
+
+NOTE: There were 515904 observations read from the data set WORK.TOTALS_DATA.
+NOTE: The data set WORK.ESTIMATE_DATA has 515904 observations and 11 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.11 seconds
+
+
+2578
+2579  proc summary data=estimate_data;
+2580   output out=estimate
+2581   sum(diff) = sum_sqr
+2582   sum(means_tot) = sum_tot;
+2583  run;
+
+NOTE: There were 515904 observations read from the data set WORK.ESTIMATE_DATA.
+NOTE: The data set WORK.ESTIMATE has 1 observations and 4 variables.
+NOTE: PROCEDURE SUMMARY used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.18 seconds
+
+
+2584
+2585  data estimate;
+2586   set estimate;
+2587   se = sqrt(sum_sqr*4/96);
+2588   lwr = sum_tot - quantile('NORMAL', 0.975) * se;
+2589   upr = sum_tot + quantile('NORMAL', 0.975) * se;
+2590   drop _TYPE_ _FREQ_ sum_sqr sum_tot;
+2591  run;
+
+NOTE: There were 1 observations read from the data set WORK.ESTIMATE.
+NOTE: The data set WORK.ESTIMATE has 1 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.03 seconds
+
+
+2592
+2593  /** by census division **/
+2594  data work.ps6_q2_result;
+2595   set brr_long.ps6_q2_result;
+2596   if TEMPNITE = -2 then delete;
+2597   if TEMPHOME ge 0;
+2598   if TEMPGONE ge 0;
+2599   keep TEMPNITE  DIVISION TEMPHOME TEMPGONE NWEIGHT BRRWT1-BRRWT96;
+2600  run;
+
+NOTE: There were 5686 observations read from the data set BRR_LONG.PS6_Q2_RESULT.
+NOTE: The data set WORK.PS6_Q2_RESULT has 5428 observations and 101 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.05 seconds
+      cpu time            0.01 seconds
+
+
+2601
+2602  /** create new format **/
+2603  proc format library=brr_long.ps6_q2_formats;
+2604   value division
+2605      1='NewEng'
+2606      2='MidAtlan'
+2607      3='ENCen'
+2608      4='WNCentral'
+2609      5='SoutAtlan'
+2610      6='ESCen'
+2611      7='WSCentral'
+2612      8='MountNth'
+2613      9='MountSth'
+2614      10='Pacific';
+NOTE: Format DIVISION has been written to BRR_LONG.PS6_Q2_FORMATS.
+2615
+2616  options fmtsearch=( brr_long.ps6_q2_formats work );
+2617
+2618  /** data processing and computing **/
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.04 seconds
+
+
+2619  proc sort data=ps6_q2_result;
+2620  by DIVISION;
+2621  run;
+
+NOTE: There were 5428 observations read from the data set WORK.PS6_Q2_RESULT.
+NOTE: The data set WORK.PS6_Q2_RESULT has 5428 observations and 101 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+
+
+2622
+2623  data ps6_q2_nweight;
+2624   set ps6_q2_result;
+2625   nite_n = TEMPNITE*NWEIGHT;
+2626   gone_n = TEMPGONE*NWEIGHT;
+2627   home_n = TEMPHOME*NWEIGHT;
+2628  run;
+
+NOTE: There were 5428 observations read from the data set WORK.PS6_Q2_RESULT.
+NOTE: The data set WORK.PS6_Q2_NWEIGHT has 5428 observations and 104 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.03 seconds
+
+
+2629
+2630  proc summary data=ps6_q2_nweight;
+2631   by DIVISION;
+2632   output out=total_q2_nweight
+2633    sum(nite_n)=total_nite
+2634    sum(gone_n)=total_gone
+2635    sum(home_n)=total_home
+2636    sum(NWEIGHT)=total_n;
+2637  run;
+
+NOTE: There were 5428 observations read from the data set WORK.PS6_Q2_NWEIGHT.
+NOTE: The data set WORK.TOTAL_Q2_NWEIGHT has 10 observations and 7 variables.
+NOTE: PROCEDURE SUMMARY used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+
+
+2638
+2639  data total_q2_nweight;
+2640   set total_q2_nweight;
+2641   w4tempnite = total_nite/total_n;
+2642   w4tempgone = total_gone/total_n;
+2643   w4temphome = total_home/total_n;
+2644  run;
+
+NOTE: There were 10 observations read from the data set WORK.TOTAL_Q2_NWEIGHT.
+NOTE: The data set WORK.TOTAL_Q2_NWEIGHT has 10 observations and 10 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+
+
+2645
+2646  /** for replicate weights **/
+2647  data work.ps6_q2_result;
+2648   set brr_long.ps6_q2_result;
+2649   if TEMPNITE = -2 then delete;
+2650   if TEMPHOME ge 0;
+2651   if TEMPGONE ge 0;
+2652   keep TEMPNITE  DIVISION TEMPHOME TEMPGONE BRRWT1-BRRWT96;
+2653  run;
+
+NOTE: There were 5686 observations read from the data set BRR_LONG.PS6_Q2_RESULT.
+NOTE: The data set WORK.PS6_Q2_RESULT has 5428 observations and 100 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.05 seconds
+      cpu time            0.06 seconds
+
+
+2654
+2655  proc sort data=ps6_q2_result;
+2656  by DIVISION TEMPNITE TEMPHOME TEMPGONE;
+2657  run;
+
+NOTE: There were 5428 observations read from the data set WORK.PS6_Q2_RESULT.
+NOTE: The data set WORK.PS6_Q2_RESULT has 5428 observations and 100 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+
+
+2658
+2659  proc transpose data=ps6_q2_result out=ps6_q2_brr prefix=BRRWT ;
+2660     by DIVISION TEMPNITE TEMPHOME TEMPGONE;
+2661  var BRRWT1-BRRWT96;
+2662  run;
+
+NOTE: There were 5428 observations read from the data set WORK.PS6_Q2_RESULT.
+NOTE: The data set WORK.PS6_Q2_BRR has 250176 observations and 78 variables.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.25 seconds
+      cpu time            0.23 seconds
+
+
+2663
+2664  data ps6_q2_brr;
+2665    set ps6_q2_brr (rename=(BRRWT1=BRRWT));
+2666    count=input(substr(_name_, 6), 2.);
+2667    drop _name_ BRRWT2-BRRWT73;
+2668  run;
+
+NOTE: There were 250176 observations read from the data set WORK.PS6_Q2_BRR.
+NOTE: The data set WORK.PS6_Q2_BRR has 250176 observations and 6 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.59 seconds
+      cpu time            0.20 seconds
+
+
+2669
+2670  proc sort data=ps6_q2_brr;
+2671  by DIVISION count;
+2672  run;
+
+NOTE: There were 250176 observations read from the data set WORK.PS6_Q2_BRR.
+NOTE: The data set WORK.PS6_Q2_BRR has 250176 observations and 6 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.17 seconds
+
+
+2673
+2674  data ps6_q2_brr1;
+2675   set ps6_q2_brr;
+2676   if cmiss(of _all_) then delete;
+2677   nite_brr = TEMPNITE*BRRWT;
+2678   gone_brr = TEMPGONE*BRRWT;
+2679   home_brr = TEMPHOME*BRRWT;
+2680  run;
+
+NOTE: There were 250176 observations read from the data set WORK.PS6_Q2_BRR.
+NOTE: The data set WORK.PS6_Q2_BRR1 has 250176 observations and 9 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.07 seconds
+
+
+2681
+2682  proc summary data=ps6_q2_brr1;
+2683   by DIVISION count;
+2684   output out=total_q2_brr
+2685   sum(nite_brr)=total_nite_b
+2686   sum(gone_brr)=total_gone_b
+2687   sum(home_brr)=total_home_b
+2688   sum(BRRWT)=total_b;
+2689  run;
+
+NOTE: There were 250176 observations read from the data set WORK.PS6_Q2_BRR1.
+NOTE: The data set WORK.TOTAL_Q2_BRR has 960 observations and 8 variables.
+NOTE: PROCEDURE SUMMARY used (Total process time):
+      real time           0.16 seconds
+      cpu time            0.14 seconds
+
+
+2690
+2691  data total_q2_brr;
+2692   set total_q2_brr;
+2693   brr4tempnite = total_nite_b/total_b;
+2694   brr4tempgone = total_gone_b/total_b;
+2695   brr4temphome = total_home_b/total_b;
+2696  run;
+
+NOTE: There were 960 observations read from the data set WORK.TOTAL_Q2_BRR.
+NOTE: The data set WORK.TOTAL_Q2_BRR has 960 observations and 11 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+
+
+2697
+2698  data totals_q2;
+2699   merge total_q2_brr total_q2_nweight;
+2700   by DIVISION;
+2701  run;
+
+NOTE: There were 960 observations read from the data set WORK.TOTAL_Q2_BRR.
+NOTE: There were 10 observations read from the data set WORK.TOTAL_Q2_NWEIGHT.
+NOTE: The data set WORK.TOTALS_Q2 has 960 observations and 18 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+
+
+2702
+2703  proc sort data=totals_q2;
+2704  by DIVISION;
+2705  run;
+
+NOTE: There were 960 observations read from the data set WORK.TOTALS_Q2.
+NOTE: The data set WORK.TOTALS_Q2 has 960 observations and 18 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.03 seconds
+
+
+2706
+2707  data totals_q2;
+2708   set totals_q2;
+2709   diff_nite = (brr4tempnite-w4tempnite)**2;
+2710   diff_gone = (brr4tempgone-w4tempgone)**2;
+2711   diff_home = (brr4temphome-w4temphome)**2;
+2712  run;
+
+NOTE: There were 960 observations read from the data set WORK.TOTALS_Q2.
+NOTE: The data set WORK.TOTALS_Q2 has 960 observations and 21 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+
+
+2713
+2714  proc summary data=totals_q2;
+2715   by DIVISION;
+2716   output out=estimate
+2717   sum(diff_nite) = sum_nite
+2718   sum(diff_gone) = sum_gone
+2719   sum(diff_home) = sum_home;
+2720  run;
+
+NOTE: There were 960 observations read from the data set WORK.TOTALS_Q2.
+NOTE: The data set WORK.ESTIMATE has 10 observations and 6 variables.
+NOTE: PROCEDURE SUMMARY used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+
+
+2721
+2722  data totals_q2;
+2723   set totals_q2;
+2724   drop count _TYPE_ _FREQ_ total_nite_b total_gone_b
+2725        total_home_b total_b brr4tempnite brr4tempgone brr4temphome
+2726        total_nite total_gone total_home total_n diff_nite diff_gone diff_home;
+2727  run;
+
+NOTE: There were 960 observations read from the data set WORK.TOTALS_Q2.
+NOTE: The data set WORK.TOTALS_Q2 has 960 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+
+
+2728
+2729  data totals_estimate_q2c;
+2730   merge totals_q2 estimate;
+2731   by DIVISION;
+2732  run;
+
+NOTE: There were 960 observations read from the data set WORK.TOTALS_Q2.
+NOTE: There were 10 observations read from the data set WORK.ESTIMATE.
+NOTE: The data set WORK.TOTALS_ESTIMATE_Q2C has 960 observations and 9 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+
+
+2733
+2734  proc sort data=totals_estimate_q2c dupout=totals_estimate_q2c_distinct nodupkey;
+2735   by DIVISION;
+2736  run;
+
+NOTE: There were 960 observations read from the data set WORK.TOTALS_ESTIMATE_Q2C.
+NOTE: 950 observations with duplicate key values were deleted.
+NOTE: The data set WORK.TOTALS_ESTIMATE_Q2C_DISTINCT has 950 observations and 9 variables.
+NOTE: The data set WORK.TOTALS_ESTIMATE_Q2C has 10 observations and 9 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.00 seconds
+
+
+2737
+2738  data totals_estimate_q2c;
+2739   set totals_estimate_q2c;
+2740   se4nite = sqrt(sum_nite)*4/96;
+2741   se4gone = sqrt(sum_gone)*4/96;
+2742   se4home = sqrt(sum_home)*4/96;
+2743   lwr_nite = w4tempnite - quantile('NORMAL', 0.975) * se4nite;
+2744   lwr_gone = w4tempgone - quantile('NORMAL', 0.975) * se4gone;
+2745   lwr_home = w4temphome - quantile('NORMAL', 0.975) * se4home;
+2746   upr_nite = w4tempnite + quantile('NORMAL', 0.975) * se4nite;
+2747   upr_gone = w4tempgone + quantile('NORMAL', 0.975) * se4gone;
+2748   upr_home = w4temphome + quantile('NORMAL', 0.975) * se4home;
+2749   drop _TYPE_ _FREQ_ sum_nite sum_gone sum_home se4nite se4gone se4home;
+2750  run;
+
+NOTE: There were 10 observations read from the data set WORK.TOTALS_ESTIMATE_Q2C.
+NOTE: The data set WORK.TOTALS_ESTIMATE_Q2C has 10 observations and 10 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.03 seconds
+
+
+2751
+2752  /** output **/
+2753  proc print data=totals_estimate_q2c noobs;
+2754   format DIVISION division.;
+2755  title "Estimation for winter home temperatures at night,
+2756        during the day with somone home, and during the day with no one home.";
+2757  run;
+
+NOTE: There were 10 observations read from the data set WORK.TOTALS_ESTIMATE_Q2C.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.01 seconds
+
+
+2758
+2759  proc export data=totals_estimate_q2c
+2760  outfile='C:/Users/lwenjing/Downloads/ps6_q2_result.csv'
+2761  dbms = dlm replace;
+2762   delimiter=',';
+2763  run;
+
+2764   /**********************************************************************
+2765   *   PRODUCT:   SAS
+2766   *   VERSION:   9.4
+2767   *   CREATOR:   External File Interface
+2768   *   DATE:      10DEC19
+2769   *   DESC:      Generated SAS Datastep Code
+2770   *   TEMPLATE SOURCE:  (None Specified.)
+2771   ***********************************************************************/
+2772      data _null_;
+2773      %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+2774      %let _EFIREC_ = 0;     /* clear export record count macro variable */
+2775      file 'C:/Users/lwenjing/Downloads/ps6_q2_result.csv' delimiter=',' DSD DROPOVER
+2775! lrecl=32767;
+2776      if _n_ = 1 then        /* write column names or labels */
+2777       do;
+2778         put
+2779            "DIVISION"
+2780         ','
+2781            "w4tempnite"
+2782         ','
+2783            "w4tempgone"
+2784         ','
+2785            "w4temphome"
+2786         ','
+2787            "lwr_nite"
+2788         ','
+2789            "lwr_gone"
+2790         ','
+2791            "lwr_home"
+2792         ','
+2793            "upr_nite"
+2794         ','
+2795            "upr_gone"
+2796         ','
+2797            "upr_home"
+2798         ;
+2799       end;
+2800     set  TOTALS_ESTIMATE_Q2C   end=EFIEOD;
+2801         format DIVISION best12. ;
+2802         format w4tempnite best12. ;
+2803         format w4tempgone best12. ;
+2804         format w4temphome best12. ;
+2805         format lwr_nite best12. ;
+2806         format lwr_gone best12. ;
+2807         format lwr_home best12. ;
+2808         format upr_nite best12. ;
+2809         format upr_gone best12. ;
+2810         format upr_home best12. ;
+2811       do;
+2812         EFIOUT + 1;
+2813         put DIVISION @;
+2814         put w4tempnite @;
+2815         put w4tempgone @;
+2816         put w4temphome @;
+2817         put lwr_nite @;
+2818         put lwr_gone @;
+2819         put lwr_home @;
+2820         put upr_nite @;
+2821         put upr_gone @;
+2822         put upr_home ;
+2823         ;
+2824       end;
+2825      if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection macro variable */
+2826      if EFIEOD then call symputx('_EFIREC_',EFIOUT);
+2827      run;
+
+NOTE: The file 'C:/Users/lwenjing/Downloads/ps6_q2_result.csv' is:
+      Filename=C:\Users\lwenjing\Downloads\ps6_q2_result.csv,
+      RECFM=V,LRECL=32767,File Size (bytes)=0,
+      Last Modified=10Dec2019:15:55:41,
+      Create Time=10Dec2019:15:55:41
+
+NOTE: 11 records were written to the file 'C:/Users/lwenjing/Downloads/ps6_q2_result.csv'.
+      The minimum record length was 95.
+      The maximum record length was 118.
+NOTE: There were 10 observations read from the data set WORK.TOTALS_ESTIMATE_Q2C.
+NOTE: DATA statement used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.03 seconds
+
+
+10 records created in C:/Users/lwenjing/Downloads/ps6_q2_result.csv from TOTALS_ESTIMATE_Q2C.
+
+
+NOTE: "C:/Users/lwenjing/Downloads/ps6_q2_result.csv" file was successfully created.
+NOTE: PROCEDURE EXPORT used (Total process time):
+      real time           0.47 seconds
+      cpu time            0.18 seconds
+
+
+
